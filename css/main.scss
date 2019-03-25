@@ -2,7 +2,10 @@
 ---
 
 @import 'bootstrap/bootstrap';
-
+body {
+  font-family: 'Roboto', sans-serif;
+  color: $blue;
+}
 .menubar {
   position:absolute;
   bottom:0;
@@ -18,11 +21,64 @@ a.nav-link {
   border-left: 1px solid $blue;
   margin: 0 5px;
 }
+.separator-white {
+  border-left: 1px solid #fff;
+  margin: 0 2px;
+}
 .sn-icon {
   width:35px;
 }
 .nav-xs .sn-icon {
   width: 20px;
+}
+.c-menu {
+  margin-bottom:45px;
+}
+.index-block {
+  background: $blue;
+}
+.index-block h1 {
+  text-transform: uppercase;
+  font-weight: bolder;
+  margin-bottom: 0px;
+  line-height: 0.9em;
+}
+.index-page-title {
+  margin-top: 50px;
+  text-align: center;
+}
+h1.text-solid {
+  color: #fff;
+  font-size: 2.5em;
+}
+h1.text-outlined {
+  color: $blue;
+  text-shadow: -1px -1px 0 #fff, 1px -1px #fff, -1px 1px #fff, 1px 1px #fff;
+  font-size: 3.2em;
+}
+h1.text-solid-orange {
+  color: $orange;
+  font-size: 5.5em;
+}
+.orange-text {
+  color: $orange;
+}
+#countdown {
+  text-align:center;
+  font-size: 1.5em;
+  margin-top:25px;
+  color: $blue;
+  margin-bottom: 50px;
+}
+#developed-by {
+  margin-top:100px;
+  font-size: 0.7em;
+  text-align:right;
+  margin-bottom: 25px;
+  margin-right: 25px;
+}
+#developed-by img {
+  max-width: 75px;
 }
 @media (max-width: 576px) { 
   .separator {
@@ -33,6 +89,15 @@ a.nav-link {
   }
   .menubar div ul {
     font-size: 0.7em;
+  }
+  h1.text-solid {
+    font-size: calc(16px + 10 * ((100vw) / 576));
+  }
+  h1.text-outlined {
+    font-size: calc(16px + 15 * ((100vw) / 576));
+  }
+  h1.text-solid-orange {
+    font-size: calc(16px + 45 * ((100vw) / 576));
   }
 }
 

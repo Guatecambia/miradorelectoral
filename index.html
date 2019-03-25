@@ -1,12 +1,82 @@
 ---
 layout: default
 ---
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h1 class="text-primary">Title</h1>
-      <p>text</p>
+<div class="index-block">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="index-page-title">
+          <h1 class="text-solid">Observación Integral</h1>
+          <h1 class="text-outlined">sobre el proceso</h1>
+          <h1 class="text-solid-orange">electoral</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+          <ul class="nav justify-content-md-center">
+            <li class="nav-item">
+              <a href="#"><img src="../assets/img/menu_off.png" /></a>
+            </li>
+            <li class="separator-white"></li>
+            <li class="nav-item">
+              <a href="#"><img src="../assets/img/menu_off.png" /></a>
+            </li>
+            <li class="separator-white"></li>
+            <li class="nav-item">
+              <a href="#"><img src="../assets/img/menu_off.png" /></a>
+            </li>
+            <li class="separator-white"></li>
+            <li class="nav-item">
+              <a href="#"><img src="../assets/img/menu_off.png" /></a>
+            </li>
+          </ul>
+      </div>
       <i class="fas fa-thumbs-up fa-2x"></i>
     </div>
   </div>
 </div>
+<div id="countdown">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <p class="justify-content-center">
+          Faltan <span id="countdown-span"></span><span class="orange-text">para las elecciones</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var nowTime = new Date();
+  var jqxhr = jQuery.get( "http://worldclockapi.com/api/json/utc/now", function(data) {
+    nowTime = new Date(data.currentDateTime).getTime() + (6 * 60 * 60 * 1000);
+  })
+  .done(function() {
+    
+  })
+  .fail(function() {
+    
+  });
+  var countDownDate = new Date("Jun 16, 2019 08:00:00").getTime();
+  var x = setInterval(function() {
+    // Find the distance between now and the count down date
+    var distance = countDownDate - nowTime;
+    nowTime = nowTime + 1000;
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the result in the element with id="demo"
+    document.getElementById("countdown-span").innerHTML = days + " días " + hours + " horas "
+    + minutes + " minutos " + seconds + " segundos ";
+
+    // If the count down is finished, write some text 
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("countdown").innerHTML = "Pronto";
+    }
+  }, 1000);
+</script>
