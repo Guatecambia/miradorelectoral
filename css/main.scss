@@ -2,3 +2,38 @@
 ---
 
 @import 'bootstrap/bootstrap';
+
+.menubar {
+  position:absolute;
+  bottom:0;
+  width:100%;
+}
+a.nav-link {
+  color: $blue;
+}
+.nav-item:hover {
+  background: $orange;
+}
+.separator {
+  border-left: 1px solid $blue;
+  margin: 0 5px;
+}
+.sn-icon {
+  width:35px;
+}
+.nav-xs .sn-icon {
+  width: 20px;
+}
+@media (max-width: 576px) { 
+  .separator {
+    margin: 0 2px;
+  }
+  .nav-link {
+    padding: 0.5rem;
+  }
+  .menubar div ul {
+    font-size: 0.7em;
+  }
+}
+
+

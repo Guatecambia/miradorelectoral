@@ -1,7 +1,7 @@
 # Site settings
-title:
+title: Mirador Electoral
 email:
-author:
+author: 
 description:
 url:
 
@@ -9,3 +9,9 @@ url:
 permalink: :title/
 sass:
   sass_dir: css
+  
+exclude: ['docker-compose.yml','LICENSE','README.md']
+
+defaults:
+  - scope:
+      path: "assets/img"
