@@ -14,8 +14,23 @@ body {
 a.nav-link {
   color: $blue;
 }
-.nav-item:hover {
+.item-img {
+  background: #fff;
+  width: 45%;
+  margin: 25px auto;
+}
+.index-block .nav-item:hover .item-img, .c-menu .nav-item:hover {
   background: $orange;
+}
+.nav-item:hover .white-text {
+  color: $orange;
+}
+.index-block .nav-item {
+  text-align:center;
+  margin-bottom: 50px;
+}
+#viz-main-menu {
+  margin-top:65px;
 }
 .separator {
   border-left: 1px solid $blue;
@@ -63,6 +78,11 @@ h1.text-solid-orange {
 .orange-text {
   color: $orange;
 }
+.white-text {
+  color: #fff;
+  background: $blue;
+  text-align:center;
+}
 #countdown {
   text-align:center;
   font-size: 1.5em;
@@ -98,6 +118,12 @@ h1.text-solid-orange {
   }
   h1.text-solid-orange {
     font-size: calc(16px + 45 * ((100vw) / 576));
+  }
+  .white-text {
+    font-size: 0.8em;
+  }
+  .separator-white {
+    margin-top: 10px;
   }
 }
 
