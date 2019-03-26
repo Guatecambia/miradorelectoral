@@ -20,12 +20,12 @@
       <div class="row menubar">
         <div class="col-12 col-md-8">
           <ul class="nav justify-content-md-center">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Quiénes somos</a>
+            <li class="nav-item {% if page.id == 'quienes-somos' %} active {% endif %}">
+              <a class="nav-link" href="/quienes-somos">Quiénes somos</a>
             </li>
             <li class="separator"></li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Descargas</a>
+            <li class="nav-item {% if page.id == 'descargas' %} active {% endif %}">
+              <a class="nav-link" href="/descargas">Descargas</a>
             </li>
           </ul>
         </div>

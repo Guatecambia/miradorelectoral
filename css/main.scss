@@ -19,7 +19,7 @@ a.nav-link {
   width: 45%;
   margin: 25px auto;
 }
-.index-block .nav-item:hover .item-img, .c-menu .nav-item:hover {
+.index-block .nav-item:hover .item-img, .c-menu .nav-item:hover, .c-menu .nav-item.active {
   background: $orange;
 }
 .nav-item:hover .white-text {
@@ -48,6 +48,7 @@ a.nav-link {
 }
 .c-menu {
   margin-bottom:45px;
+  margin-top: 25px;
 }
 .index-block {
   background: $blue;
@@ -99,6 +100,21 @@ h1.text-solid-orange {
 }
 #developed-by img {
   max-width: 75px;
+}
+h1 {
+  font-weight: bold;
+}
+h1 .title-orange {
+  color: $orange;
+  font-size: 1.3em;
+  
+}
+.title-orange {
+  border-bottom: 15px solid $blue;
+}
+.content {
+  margin-top:65px;
+  margin-bottom: 80px;
 }
 @media (max-width: 576px) { 
   .separator {
