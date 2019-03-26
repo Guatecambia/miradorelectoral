@@ -1,0 +1,5 @@
+jekyll:
+    command: jekyll build  
+    environment:
+        JEKYLL_ENV: production
+
