@@ -3,7 +3,9 @@ version: "3"
 services:
     me_nginx:
         container_name: miradorelectoral_frontend
-        build: ./proxy-server/webapp
+        build: 
+            context: ./
+            dockerfile: ./proxy-server/webapp/Dockerfile
         expose:
             - 80
         environment:
