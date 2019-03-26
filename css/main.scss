@@ -151,6 +151,15 @@ h1 .title-orange {
   h1.text-solid-orange {
     font-size: calc(16px + 45 * ((100vw) / 576));
   }
+  h1 {
+    font-weight: bold;
+    font-size: calc(16px + 8 * ((100vw) / 576));
+  }
+  h1 .title-orange {
+    color: $orange;
+    font-size: calc(16px + 20 * ((100vw) / 576));
+    
+  }
   .white-text {
     font-size: 0.8em;
   }
