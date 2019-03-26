@@ -10,7 +10,7 @@ permalink: :title/
 sass:
   sass_dir: css
   
-exclude: ['docker-compose.yml','docker-compose.build.yml','docker-compose.prod.yml','proxy-server','LICENSE','README.md']
+exclude: ['docker-compose.yml','docker-compose.build.yml','docker-compose.prod.yml','docker-compose.test.yml','proxy-server','LICENSE','README.md']
 
 defaults:
   - scope:
