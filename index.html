@@ -62,15 +62,14 @@ layout: default
 </div>
 <script>
   var nowTime = new Date();
+  {% if jekyll.environment == 'production' %}
+    /*get server time*/
+    nowTime = new Date('<!--# echo var="DATE_LOCAL" -->').getTime();
+  {% else %}
   var jqxhr = jQuery.get( "http://worldclockapi.com/api/json/utc/now", function(data) {
     nowTime = new Date(data.currentDateTime).getTime();
-  })
-  .done(function() {
-    
-  })
-  .fail(function() {
-    
   });
+  {% endif %}
   var countDownDate = new Date("Jun 16, 2019 00:00:00").getTime();
   var x = setInterval(function() {
     // Find the distance between now and the count down date

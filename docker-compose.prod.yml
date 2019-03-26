@@ -10,8 +10,8 @@ services:
             - 80
         environment:
             VIRTUAL_HOST: www.miradorelectoral.gt,miradorelectoral.gt
-            # LETSENCRYPT_HOST: www.miradorelectoral.gt
-            # LETSENCRYPT_EMAIL: javier@guatecambia.org.gt
+            LETSENCRYPT_HOST: www.miradorelectoral.gt
+            LETSENCRYPT_EMAIL: javier@guatecambia.org.gt
         volumes:
             - ./proxy-server/webapp/nginx.conf:/etc/nginx/nginx.conf
             - ./proxy-server/webapp/sites/:/etc/nginx/sites-available
