@@ -167,5 +167,12 @@ h1 .title-orange {
     margin-top: 10px;
   }
 }
-
+@media (max-width: 321px) { 
+  .menubar div ul {
+    font-size: 0.6em;
+  }
+  .nav-xs {
+    margin-bottom: 40px;
+  }
+}
 
