@@ -63,7 +63,7 @@ layout: default
 <script>
   var nowTime = new Date();
   var jqxhr = jQuery.get( "http://worldclockapi.com/api/json/utc/now", function(data) {
-    nowTime = new Date(data.currentDateTime).getTime() + (6 * 60 * 60 * 1000);
+    nowTime = new Date(data.currentDateTime).getTime();
   })
   .done(function() {
     
@@ -71,7 +71,7 @@ layout: default
   .fail(function() {
     
   });
-  var countDownDate = new Date("Jun 16, 2019 08:00:00").getTime();
+  var countDownDate = new Date("Jun 16, 2019 00:00:00").getTime();
   var x = setInterval(function() {
     // Find the distance between now and the count down date
     var distance = countDownDate - nowTime;
