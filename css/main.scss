@@ -141,6 +141,18 @@ h1 .title-orange {
   margin-top:65px;
   margin-bottom: 80px;
 }
+.download-item a{
+  color: $blue;
+}
+.download-item:hover a{
+  color: $orange;
+}
+.download-item .img-holder{
+  background: $blue;
+}
+.download-item:hover .img-holder{
+  background: $orange;
+}
 @media (max-width: 576px) { 
   .separator {
     margin: 0 2px;
