@@ -153,7 +153,56 @@ h1 .title-orange {
 .download-item:hover .img-holder{
   background: $orange;
 }
-@media (max-width: 576px) { 
+div#tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 10px;
+    font-size: 15px;
+    background: rgba(7,33,56,0.9);
+    color:#fff;
+    border: 0px;
+    border-radius: 5px;
+    pointer-events: none;
+    opacity:0;
+}
+#tooltip h1, #tooltip h2, #tooltip h3 {
+    color:#fff;
+    font-size:18px;
+}
+.detail-header {
+  background: $orange;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.header-muni, .header-nr, .muni-name, .muni-nr {
+  display: inline-block;
+}
+.header-muni, .muni-name {
+  width: 65%;
+  padding-left:5px;
+}
+.header-nr, .muni-nr {
+  width: 35%;
+}
+.square {
+  height: 15px;
+  width: 15px;
+  display: inline-block;
+  margin-right: 5px;
+}
+.Extremo { background: #FE0000; }
+.Alto { background: #ED7D31; }
+.Medio { background: #FFFF00;}
+.Bajo { background: #92D051;}
+.btn-secondary {
+  color: $blue;
+  background: $orange;
+  border: 1px solid $orange;
+}
+.btn-secondary:hover {
+  background: #f79b20;
+}
+@media (max-width: 576px) {
   .separator {
     margin: 0 2px;
   }

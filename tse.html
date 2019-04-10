@@ -2,6 +2,8 @@
 layout: default
 id: tse
 ---
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/topojson-client@3"></script>
 <div class="container">
   <div class="row">
     <div class="col-12">
@@ -14,6 +16,119 @@ id: tse
       <ul>
         <li>Observación del desempeño del Tribunal Supremo Electoral y de sus órganos temporales. Especial énfasis en el funcionamiento de las Unidades de Control y Fiscalización y de Medios de Comunicación y Estudios de Opinión Pública. Seguimiento general del cumplimiento de la LEPP y del calendario electoral.</li>
       </ul>
+    </div>
+  </div>
+  <div class="row content">
+    <div class="col-12">
+      <div id="container" class="svg-container"></div>
+        <script type="text/javascript">
+          var w = 600;
+          var h = 600;
+          var svg = d3.select("div#container").append("svg").attr("preserveAspectRatio", "xMinYMin meet")
+                .attr("viewBox", "0 0 " + w + " " + h).style("background","#c9e8fd")
+                .classed("svg-content", true);
+          var projection = d3.geoMercator()
+                            .translate([w/2, h/2])
+                            .scale(7701.467646382165)
+                            .center([-90.23084508112287,15.888754053851084]);
+          var path = d3.geoPath().projection(projection);
+          var gtMap = d3.json("../assets/munis.topojson");
+          var cities = d3.csv("../assets/munis.csv");
+          tooltip = d3.select("div#container").append("div")
+            .attr("id","tooltip");
+          Promise.all([gtMap, cities]).then(function(values){
+          // draw map
+              var outlines = topojson.feature(values[0], values[0].objects.collection);
+              var muniData = [];
+              for (var i in values[1]) {
+                muniData[values[1][i]["CODIGO"]] = values[1][i];
+              }
+              svg.selectAll("path")
+                  .data(outlines.features)
+                  .enter()
+                  .append("path")
+                  .attr("d", path)
+                  .style('fill', function(d) {
+                    if(d.properties["CODIGO"] in muniData) {
+                      switch(muniData[d.properties["CODIGO"]]["Nivel de riesgo"]) {
+                        case "1": return "#92D051"; break;
+                        case "2": return "#FFFF00"; break;
+                        case "3": return "#ED7D31"; break;
+                        case "4": return "#FE0000"; break;
+                      }
+                    }
+                    return "#c9e8fd";
+                  })
+                  .style('stroke','black')
+                  .style('stroke-width','0.3px')
+                  .on('click', function(d) {
+                    self.tooltip.transition()
+                      .duration(1)
+                      .style("left", "0px")
+                      .style("top", "0px");
+                    jQuery("#departmentName").html(muniData[d.properties["CODIGO"]]["Departamento"]);
+                    jQuery("#departmentDetails").html("<div class='detail-header'><div class='header-muni'>Municipio</div><div class='header-nr'>Nivel de riesgo</div></div>");
+                    jQuery("#departmentDetails").append("<div class='detail-body'>");
+                    var NR = "";
+                    for (var i in values[1]) {
+                      if (d.properties["COD_DEP"] == values[1][i]["COD_DEP"]) {
+                        switch(values[1][i]["Nivel de riesgo"]) {
+                          case "1": NR = "Bajo"; break;
+                          case "2": NR = "Medio"; break;
+                          case "3": NR = "Alto"; break;
+                          case "4": NR = "Extremo"; break;
+                        }
+                        jQuery("#departmentDetails").append("<div class='detail-row'><div class='muni-name'>"+values[1][i]["Municipio"]+"</div><div class='muni-nr'><div class='square "+NR+"'></div>"+NR+"</div></div>");
+                      }
+                    }
+                    jQuery("#departmentDetails").append("</div><!--detail-body-->");
+                    jQuery("#departmentData").modal();
+                  })
+                  .on('mouseover', function(d,i) {
+                    console.log(event.pageY - jQuery(document).scrollTop());
+                    self.tooltip.transition()
+                      .duration(200)
+                      .style("opacity", 1);
+                    if(d.properties["CODIGO"] in muniData) {
+                      switch(muniData[d.properties["CODIGO"]]["Nivel de riesgo"]) {
+                        case "1": NR = "Bajo"; break;
+                        case "2": NR = "Medio"; break;
+                        case "3": NR = "Alto"; break;
+                        case "4": NR = "Extremo"; break;
+                      }
+                    }
+                    self.tooltip.html("<h1>"+muniData[d.properties["CODIGO"]]["Departamento"]+" - "
+                                      +muniData[d.properties["CODIGO"]]["Municipio"]+"</h1>"+NR
+                                    )
+                      .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#container').offset().left)+"px")
+                      .style("top", (event.pageY - jQuery('div#container').offset().top)+"px");
+                  })
+                  .on('mouseout', function(d) {
+                    self.tooltip.transition()
+                      .duration(500)
+                      .style("opacity",0);
+                  });
+          });
+        </script>
+        <div class="modal" id="departmentData" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="departmentName">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" id="departmentDetails"></div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
