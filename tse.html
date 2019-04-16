@@ -20,12 +20,13 @@ id: tse
   </div>
   <div class="row content">
     <div class="col-12">
+      <h2>Municipios según su nivel de riesgo de conflictividad electoral</h2>
       <div id="container" class="svg-container"></div>
         <script type="text/javascript">
           var w = 600;
           var h = 600;
           var svg = d3.select("div#container").append("svg").attr("preserveAspectRatio", "xMinYMin meet")
-                .attr("viewBox", "0 0 " + w + " " + h).style("background","#c9e8fd")
+                .attr("viewBox", "0 0 " + w + " " + h).style("background","#fff")
                 .classed("svg-content", true);
           var projection = d3.geoMercator()
                             .translate([w/2, h/2])
@@ -35,7 +36,8 @@ id: tse
           var gtMap = d3.json("../assets/munis.topojson");
           var cities = d3.csv("../assets/munis.csv");
           tooltip = d3.select("div#container").append("div")
-            .attr("id","tooltip");
+            .attr("id","tooltip")
+            .attr("class","tooltip");
           Promise.all([gtMap, cities]).then(function(values){
           // draw map
               var outlines = topojson.feature(values[0], values[0].objects.collection);
@@ -85,7 +87,6 @@ id: tse
                     jQuery("#departmentData").modal();
                   })
                   .on('mouseover', function(d,i) {
-                    console.log(event.pageY - jQuery(document).scrollTop());
                     self.tooltip.transition()
                       .duration(200)
                       .style("opacity", 1);
@@ -128,6 +129,149 @@ id: tse
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h2>Padrón electoral</h2>
+        <p>El número de empadronados al 17 de marzo es de 7,953,187 distribuido en 4, 272,208 mujeres correspondiente al 53.72%, y 3,680,979 hombres correspondiente al 46.28 %</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-6">
+        <div id="padron2019"></div>
+        <script type="text/javascript">
+          var data = [
+                {name: 'Hombres', count: 3680979, percentage: 46.3, color: "#222c58"},
+                {name: 'Mujeres', count: 4272208, percentage: 53.7, color: "#f7a520"},
+              ];
+          var width = parseInt(d3.select("#padron2019").style("width"));
+          var height = width * 0.75;
+          var radius = (Math.min(width, height) / 2);
+          var radius = radius * 0.4;
+          var svgPadron = d3.select("div#padron2019")
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .append('g')
+                .attr('transform', 'translate(' + (width/2) + ',' + (height/2) + ')');
+
+          var tooltipP2019 = d3.select("div#padron2019").append("div")
+                .attr("id","tooltipP2019")
+                .attr("class","tooltip");
+
+          var arc = d3.arc()
+                .outerRadius(radius - 10)
+                .innerRadius(radius - (radius/2));
+
+          var pie = d3.pie()
+                .sort(null)
+                .value(function(d) {
+                  return d.percentage;
+                });
+
+          var g = svgPadron.selectAll(".arc")
+                .data(pie(data))
+                .enter().append('g')
+                .on('mouseover', function(d,i) {
+                  self.tooltipP2019.transition()
+                    .duration(200)
+                    .style("opacity", 1);
+                  self.tooltipP2019.html(d.data.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" personas")
+                      .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#padron2019').offset().left)+"px")
+                      .style("top", (event.pageY - jQuery('div#padron2019').offset().top)+"px");
+                })
+                .on('mouseout', function(d) {
+                  self.tooltipP2019.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+
+          g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d,i) {
+              return d.data.color;
+            });
+
+          g.append("text")
+            .attr("transform", function(d) {
+              var _d = arc.centroid(d);
+              _d[0] *= 2;
+              _d[1] *= 1.5;
+              return "translate(" + _d + ")";
+            })
+            .attr("dy", "0.5em")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+              return d.data.name + ':' + d.data.percentage + '%';
+            });
+        </script>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h2>Crecimiento en el padrón</h2>
+        <p>El total de empadronados a la fecha establecida fue de 7,678,069 cifra que refleja un incremento inter electoral respecto del 31 de diciembre del año 2014 de 2.28% habiéndose empadronado durante cuatro años 171,173 nuevos ciudadanos.</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-6">
+        <div id="padronComparativo"></div>
+        <script type="text/javascript">
+          var data = [
+                {year: '2007', count: 5990029},
+                {year: '2011', count: 7340841},
+                {year: '2015', count: 7556873},
+                {year: '2019', count: 7953187},
+              ];
+          var margin = {top: 20, right: 20, bottom: 30, left: 70};
+          var width = parseInt(d3.select("#padronComparativo").style("width")) - margin.left - margin.right;
+          var height = width/2 - margin.top - margin.bottom;
+          var yScale = d3.scaleLinear()
+              .range([height, 0])
+              .domain([0, d3.max(data, function(d) { return d["count"]; })]);
+          var xScale = d3.scaleBand()
+              .range([0, width])
+              .domain(data.map(function(d) { return d["year"]; }))
+              .padding(0.1);
+          var svgPadronC = d3.select("div#padronComparativo")
+                .append('svg')
+                .attr('width', width+margin.left+margin.right)
+                .attr('height', height+margin.top+margin.bottom)
+                .append('g')
+                .attr('transform', 'translate('+margin.left+','+margin.top+')');
+          var tooltipPC = d3.select("div#padronComparativo").append("div")
+                .attr("id","tooltipPComparativo")
+                .attr("class","tooltip");
+          var g = svgPadronC.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr("class","bar")
+                .attr("x", function(d) { return xScale(d["year"]); })
+                .attr("width", xScale.bandwidth() )
+                .attr("y", function(d) { return yScale(d["count"]); })
+                .attr("height", function(d) { return height - yScale(d["count"]); })
+                .on('mouseover', function(d,i) {
+                  self.tooltipPC.transition()
+                    .duration(200)
+                    .style("opacity", 1);
+                  self.tooltipPC.html(d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" personas")
+                      .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#padronComparativo').offset().left)+"px")
+                      .style("top", (event.pageY - jQuery('div#padronComparativo').offset().top)+"px");
+                })
+                .on('mouseout', function(d) {
+                  self.tooltipPC.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+          svgPadronC.append("g")
+            .attr("transform", "translate(0, "+height+")")
+            .call(d3.axisBottom(xScale));
+            
+          svgPadronC.append("g")
+            .call(d3.axisLeft(yScale));
+        </script>
       </div>
     </div>
   </div>
