@@ -174,15 +174,34 @@ h1 .title-orange {
   font-weight: bold;
   margin-bottom: 20px;
 }
-.header-muni, .header-nr, .muni-name, .muni-nr {
+.header-muni, .header-nr, .muni-name, .muni-nr, .header-candidato, .candidato-num, .candidato-name, .header-candidato-n {
   display: inline-block;
+}
+.candidato-suplente {
+  margin-left:30px;
+}
+.btn-link {
+  font-size:1.6em;
+}
+.header-candidato-n {
+  padding-left:5px;
 }
 .header-muni, .muni-name {
   width: 65%;
   padding-left:5px;
 }
+.header-candidato, .candidato-num, .candidato-name {
+  padding-left: 5px;
+}
 .header-nr, .muni-nr {
   width: 35%;
+}
+.viz-separator {
+  border-bottom: 1px solid #ddd;
+  margin: 40px 0;
+}
+#calendar-line svg {
+  background: url('../assets/img/calendar.jpg');
 }
 .square {
   height: 15px;
@@ -205,6 +224,47 @@ h1 .title-orange {
 .bar {
   background: gray;
   fill: $orange;
+}
+.info-square {
+  padding: 10px;
+  font-size: 0.9em;
+  border: 1px solid #bbb;
+  color: #bbb;
+  position:absolute;
+}
+.info-square.active {
+  border: 1px solid $blue;
+  color: $blue;
+}
+.square-title {
+  font-weight: bold;
+}
+#l1 { top:112px; }
+#l2 { top:315px; }
+#l3 { top:416px; }
+#l4 { top:500px; }
+#l5 { top:598px; }
+#l6 { top:660px; }
+#l7 { top:820px; }
+#l8 { top:895px; }
+#l9 { top:1111px; }
+#r1 { top:304px; }
+#r2 { top:375px; }
+#r3 { top:452px; }
+#r4 { top:521px; }
+#r5 { top:584px; }
+#r6 { top:716px; }
+#r7 { top:788px; }
+#r8 { top:1003px; }
+#r9 { top:1218px; }
+.fixed-380 {
+  width:380px !important;
+}
+span.bold {
+  font-weight: bold;
+}
+#parlacen-table, #parlacen-graphs {
+  margin-top: 45px;
 }
 @media (max-width: 576px) {
   .separator {

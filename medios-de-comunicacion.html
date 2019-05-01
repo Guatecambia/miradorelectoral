@@ -70,7 +70,7 @@ id: medios-de-comunicacion
                   .style("opacity", 1);
                 self.tooltipCyP.html(d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" notas")
                     .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#coberturaCyP').offset().left)+"px")
-                    .style("top", (event.pageY - jQuery('div#coberturaCyP').offset().top)+"px");
+                    .style("top", (event.pageY - jQuery('div#coberturaCyP').offset().top + 40)+"px");
               })
               .on('mouseout', function(d) {
                 self.tooltipCyP.transition()
@@ -87,7 +87,7 @@ id: medios-de-comunicacion
     </div>
   </div>
 
-
+  <div class="row viz-separator"></div>
   <div class="row content justify-content-center">
     <div class="col-12 col-lg-6">
       <h2>Candidatos con mayor cobertura (en número de menciones)</h2>
@@ -134,7 +134,7 @@ id: medios-de-comunicacion
                   .style("opacity", 1);
                 self.tooltipCM.html(d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" menciones")
                     .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#candidatoMencion').offset().left)+"px")
-                    .style("top", (event.pageY - jQuery('div#candidatoMencion').offset().top)+"px");
+                    .style("top", (event.pageY - jQuery('div#candidatoMencion').offset().top + 40)+"px");
               })
               .on('mouseout', function(d) {
                 self.tooltipCM.transition()
@@ -150,7 +150,7 @@ id: medios-de-comunicacion
       </script>
     </div>
   </div>
-
+  <div class="row viz-separator"></div>
   <div class="row content justify-content-center">
     <div class="col-12 col-lg-6">
       <h2>Cobertura de partídos politicos (en número de notas)</h2>
@@ -196,7 +196,7 @@ id: medios-de-comunicacion
                   .style("opacity", 1);
                 self.tooltipCPP.html(d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" notas")
                     .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#coberturaPP').offset().left)+"px")
-                    .style("top", (event.pageY - jQuery('div#coberturaPP').offset().top)+"px");
+                    .style("top", (event.pageY - jQuery('div#coberturaPP').offset().top + 40)+"px");
               })
               .on('mouseout', function(d) {
                 self.tooltipCPP.transition()
@@ -212,7 +212,7 @@ id: medios-de-comunicacion
       </script>
     </div>
   </div>
-
+  <div class="row viz-separator"></div>
   <div class="row content justify-content-center">
     <div class="col-12 col-lg-6">
       <h2>Los partidos más cubiertos (en número de menciones)</h2>
@@ -259,7 +259,7 @@ id: medios-de-comunicacion
                   .style("opacity", 1);
                 self.tooltipPM.html(d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" menciones")
                     .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#partidoMencion').offset().left)+"px")
-                    .style("top", (event.pageY - jQuery('div#partidoMencion').offset().top)+"px");
+                    .style("top", (event.pageY - jQuery('div#partidoMencion').offset().top + 40)+"px");
               })
               .on('mouseout', function(d) {
                 self.tooltipPM.transition()

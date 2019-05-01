@@ -2,19 +2,611 @@
 layout: default
 id: organizaciones-politicas
 ---
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
 <div class="container">
   <div class="row">
     <div class="col-12">
       <h1 class="title">Organizaciones<br/><span class="title-orange">políticas</span></h1>
     </div>
   </div>
-  <div class="row content">
+  <!--div class="row content">
     <div class="col-12">
       <p>Proximamente podras encontrar:</p>
       <ul>
         <li>Observación del desempeño de los actores políticos interesados en el Proceso Electoral 2019: partidos políticos, comités cívicos, candidaturas. Entre los temas prioritarios a observar se encuentra el financiamiento de la campaña, violencia electoral y participación de poblaciones históricamente excluidas (mujeres, pueblos indígenas, población LGBTIQ)</li>
         <li>La transparencia de las candidaturas, mediante la iniciativa 3de3: declaraciones patrimonial, impositiva y de conflicto de intereses.</li>
       </ul>
+    </div>
+  </div-->
+</div>
+<div class="container" style="margin-top:35px;">
+  <div class="row">
+    <div class="col-12">
+      <h2>Candidaturas para diputados Listado Nacional y Parlacen</h2>
+      <div id="parties"></div>
+      <script type="text/javascript">
+        cNacional = [{partido:"FCN-NACIÓN",casilla:"1",persona:"Javier Alfonso Hernandez Franco"},
+                      {partido:"FCN-NACIÓN",casilla:"2",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"3",persona:"Herber Armando Melgar Padilla"},
+                      {partido:"FCN-NACIÓN",casilla:"4",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"5",persona:"Flor de María Chajón Aguilar"},
+                      {partido:"FCN-NACIÓN",casilla:"6",persona:"Donald René Juárez"},
+                      {partido:"FCN-NACIÓN",casilla:"7",persona:"Jaime René García"},
+                      {partido:"FCN-NACIÓN",casilla:"8",persona:"Romel Gustavo Rosales Arriaza"},
+                      {partido:"FCN-NACIÓN",casilla:"9",persona:"RubenIvan España Chinchilla"},
+                      {partido:"FCN-NACIÓN",casilla:"10",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"11",persona:"Julia Elizabeth Juarez Estrada"},
+                      {partido:"FCN-NACIÓN",casilla:"12",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"13",persona:"Argenis Gabriel Ordoñez Francia"},
+                      {partido:"FCN-NACIÓN",casilla:"14",persona:"Luz Angélica Mendez Zazo Carcamo"},
+                      {partido:"FCN-NACIÓN",casilla:"15",persona:"Astrid del Rosario Rodas Soto"},
+                      {partido:"FCN-NACIÓN",casilla:"16",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"17",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"18",persona:"Eder Hazael Garrido Hernández"},
+                      {partido:"FCN-NACIÓN",casilla:"19",persona:"Josue Peinado Estrada"},
+                      {partido:"FCN-NACIÓN",casilla:"20",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"21",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"22",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"23",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"24",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"25",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"26",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"27",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"28",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"29",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"30",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"31",persona:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"32",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"1",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"2",persona:"José Israel Pérez Quezada"},
+                      {partido:"FUERZA",casilla:"3",persona:"Christian Leslie Pineda Quezada"},
+                      {partido:"FUERZA",casilla:"4",persona:"Herbert Francisco Garavito Petersen"},
+                      {partido:"FUERZA",casilla:"5",persona:"Jose Carlos Dardón Maldonado"},
+                      {partido:"FUERZA",casilla:"6",persona:"Álvaro Rudencindo Girón Vásquez"},
+                      {partido:"FUERZA",casilla:"7",persona:"Carlos Estuardo Pérez Sandoval"},
+                      {partido:"FUERZA",casilla:"8",persona:"Carlos Vicente Navas González"},
+                      {partido:"FUERZA",casilla:"9",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"10",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"11",persona:"Luis Rodrigo Espinoza Orellana"},
+                      {partido:"FUERZA",casilla:"12",persona:"Jose Fernando Méndez"},
+                      {partido:"FUERZA",casilla:"13",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"14",persona:"Roberto Ardanni Zelaya"},
+                      {partido:"FUERZA",casilla:"15",persona:"Quirio Francisco Fernandez Tórtola"},
+                      {partido:"FUERZA",casilla:"16",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"17",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"18",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"19",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"20",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"21",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"22",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"23",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"24",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"25",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"26",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"27",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"28",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"29",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"30",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"31",persona:"Vacante"},
+                      {partido:"FUERZA",casilla:"32",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"1",persona:"Felipe Alejos Lorenzana"},
+                      {partido:"TODOS",casilla:"2",persona:"Johann Peter Gehlert Coronado"},
+                      {partido:"TODOS",casilla:"3",persona:"Nery Oswaldo Medina Ricco"},
+                      {partido:"TODOS",casilla:"4",persona:"Jose Rodrigo de los Santos Valladares Guillén"},
+                      {partido:"TODOS",casilla:"5",persona:"Vinicio Abrahim Zelada Rodríguez"},
+                      {partido:"TODOS",casilla:"6",persona:"Julia Esperanza Lucero Goméz"},
+                      {partido:"TODOS",casilla:"7",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"8",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"9",persona:"Juan Carlos Sagastume Saavedra"},
+                      {partido:"TODOS",casilla:"10",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"11",persona:"Glenda Julieta Vásquez Pérez"},
+                      {partido:"TODOS",casilla:"12",persona:"Roberto Otto Alejandro Fernández Fernández"},
+                      {partido:"TODOS",casilla:"13",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"14",persona:"Víctor Manuel Cerín Leonor"},
+                      {partido:"TODOS",casilla:"15",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"16",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"17",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"18",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"19",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"20",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"21",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"22",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"23",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"24",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"25",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"26",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"27",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"28",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"29",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"30",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"31",persona:"Vacante"},
+                      {partido:"TODOS",casilla:"32",persona:"Vacante"},
+                      {partido:"VALOR",casilla:"1",persona:"Vacante"},
+                      {partido:"VALOR",casilla:"2",persona:"Antonio Fernando Arenales Forno"},
+                      {partido:"VALOR",casilla:"3",persona:"Elmer Josué Palencia Reyes"},
+                      {partido:"VALOR",casilla:"4",persona:"Edgar Rolando Zamora Ruiz"},
+                      {partido:"VALOR",casilla:"5",persona:"Marcos Olivero García"},
+                      {partido:"VALOR",casilla:"6",persona:"Migule Ángel Velasco Bitzol"},
+                      {partido:"VALOR",casilla:"7",persona:"Vacante"},
+                      {partido:"VALOR",casilla:"8",persona:"Jose Miguel Argueta Bone"},
+                      {partido:"VALOR",casilla:"9",persona:"Elsa Angélica Blanco Amaya"},
+                      {partido:"VALOR",casilla:"10",persona:"Ada Guadalupe Quixtán López"},
+                      {partido:"VALOR",casilla:"11",persona:"José Miguel Valle Colindres"},
+                      {partido:"VALOR",casilla:"12",persona:"José Alfredo Trujillo Aldana"},
+                      {partido:"VALOR",casilla:"13",persona:"Luis Eduardo Vivas Pérez"},
+                      {partido:"VALOR",casilla:"14",persona:"Vacante"},
+                      {partido:"VALOR",casilla:"15",persona:"Renato Bohanerges Lechuga García"},
+                      {partido:"VALOR",casilla:"16",persona:"Claudia Irene Cor´don Guzmán"},
+                      {partido:"VALOR",casilla:"17",persona:"Vacante"},
+                      {partido:"VALOR",casilla:"18",persona:"Rudý Alexander García García"},
+                      {partido:"VALOR",casilla:"19",persona:"Laura María Flores Ovando"},
+                      {partido:"VALOR",casilla:"20",persona:"Vacante"},
+                      {partido:"VALOR",casilla:"21",persona:"Janely Jazmin Castillo"},
+                      {partido:"VALOR",casilla:"22",persona:"Jefrey Orlando Jovanovich Cáceres Solís"},
+                      {partido:"VALOR",casilla:"23",persona:"Vacante"},
+                      {partido:"VALOR",casilla:"24",persona:"Vacante"},
+                      {partido:"VALOR",casilla:"25",persona:"Elsa Yolanda Figueroa López"},
+                      {partido:"VALOR",casilla:"26",persona:"Carlos René Ochoa González"},
+                      {partido:"VALOR",casilla:"27",persona:"Monica Gabriela Hernández Monroy"},
+                      {partido:"VALOR",casilla:"28",persona:"Luis Fernando Dieguez Barrientos"},
+                      {partido:"VALOR",casilla:"29",persona:"Ileana Waleska Marroquín Paz"},
+                      {partido:"VALOR",casilla:"30",persona:"Marvin Miguel Martínez Milán"},
+                      {partido:"VALOR",casilla:"31",persona:"Juan Manuel Sierra Sanabria"},
+                      {partido:"VALOR",casilla:"31",persona:"Vacante"},
+                      {partido:"VALOR",casilla:"32",persona:"Vacante"},
+                      {partido:"VAMOS",casilla:"1",persona:"Juan Francisco Mérida Contreras"},
+                      {partido:"VAMOS",casilla:"2",persona:"Daisy Anaité Guzmán Velásquez"},
+                      {partido:"VAMOS",casilla:"3",persona:"María Eugenia Castellanos Pinelo de Pineda"},
+                      {partido:"VAMOS",casilla:"4",persona:"Leonel Rodriguez Vielman"},
+                      {partido:"VAMOS",casilla:"5",persona:"Inocencio Edwin López García"},
+                      {partido:"VAMOS",casilla:"6",persona:"Jorge Oswaldo Jerez Cuevas"},
+                      {partido:"VAMOS",casilla:"7",persona:"Julio Enrique Reyes Granados"},
+                      {partido:"VAMOS",casilla:"8",persona:"Ronald Estuardo Recinos Gomez"},
+                      {partido:"VAMOS",casilla:"9",persona:"Mario Roderico Mazariegos de León"},
+                      {partido:"VAMOS",casilla:"10",persona:"Erick Fernando Mazariegos Salas"},
+                      {partido:"VAMOS",casilla:"11",persona:"Hector Adolfo Aldana Reyes"},
+                      {partido:"VAMOS",casilla:"12",persona:"Rafael Alberto Lobos Madrid"},
+                      {partido:"VAMOS",casilla:"13",persona:"José Petronilo Velásquez Gameros"},
+                      {partido:"VAMOS",casilla:"14",persona:"Hugo Roberto Monroy Castillo"},
+                      {partido:"VAMOS",casilla:"15",persona:"RodolgoGaldamez Orellana"},
+                      {partido:"VAMOS",casilla:"16",persona:"Ludwin Eduardo Lucas Muñoz"},
+                      {partido:"VAMOS",casilla:"17",persona:"Noé Joel Flores Chicas"},
+                      {partido:"VAMOS",casilla:"18",persona:"Federico Eduardo Álvarez Larrazabal"},
+                      {partido:"VAMOS",casilla:"19",persona:"Diego Alejandro Martínez Cabrera"},
+                      {partido:"VAMOS",casilla:"20",persona:"Maynor Estuardo Monroy Castillo"},
+                      {partido:"VAMOS",casilla:"21",persona:"Andrea Beatriz Valdez de León"},
+                      {partido:"VAMOS",casilla:"22",persona:"Camilo Moisés García Turnil"},
+                      {partido:"VAMOS",casilla:"23",persona:"Julio César Romero Solis"},
+                      {partido:"VAMOS",casilla:"24",persona:"Dámaris Olivia España Morales de Carpio"},
+                      {partido:"VAMOS",casilla:"25",persona:"Rudy Adelso Sandoval Franco"},
+                      {partido:"VAMOS",casilla:"26",persona:"MarelynJissel Orellana Moscoso de Estrada"},
+                      {partido:"VAMOS",casilla:"27",persona:"Edgar Enrique Reyes Acevedo"},
+                      {partido:"VAMOS",casilla:"28",persona:"Vacante"},
+                      {partido:"VAMOS",casilla:"29",persona:"Josue Estuardo Berganza Cardona"},
+                      {partido:"VAMOS",casilla:"30",persona:"Paula María Escobar Natareno"},
+                      {partido:"VAMOS",casilla:"31",persona:"Vacante"},
+                      {partido:"VAMOS",casilla:"32",persona:"Omar Juan Pablo Villatla Contreras"},
+                      {partido:"WINAQ",casilla:"1",persona:"Sonia Marina Gutiérrez Raguay"},
+                      {partido:"WINAQ",casilla:"2",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"3",persona:"Mario Gerardo Ellington Lambe"},
+                      {partido:"WINAQ",casilla:"4",persona:"Carlos Erick Ortiz Gomez"},
+                      {partido:"WINAQ",casilla:"5",persona:"José Alberto Chic Cardona"},
+                      {partido:"WINAQ",casilla:"6",persona:"SaknictéIshchelRacancoj Sierra"},
+                      {partido:"WINAQ",casilla:"7",persona:"Lidia FloriceldaTuxChub"},
+                      {partido:"WINAQ",casilla:"8",persona:"Edgar Guillermo Castillo Barillas"},
+                      {partido:"WINAQ",casilla:"9",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"10",persona:"Henry IbigailAjinPocón"},
+                      {partido:"WINAQ",casilla:"11",persona:"Cristóbal Cojtí García"},
+                      {partido:"WINAQ",casilla:"12",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"13",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"14",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"15",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"16",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"17",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"18",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"19",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"20",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"21",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"22",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"23",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"24",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"25",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"26",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"27",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"28",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"29",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"30",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"31",persona:"Vacante"},
+                      {partido:"WINAQ",casilla:"32",persona:"Vacante"}];
+        cParlacen = [{partido:"FCN-NACIÓN",casilla:"1",persona:"Gilmar Othmar Sánchez Herrera ",suplente:"Sigrid Janelle Sánchez Herrera "},
+                      {partido:"FCN-NACIÓN",casilla:"2",persona:"Iliana Guadalupe Calles Domínguez ",suplente:"Jorge Enrique Meléndez Moreira "},
+                      {partido:"FCN-NACIÓN",casilla:"3",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"4",persona:"Jorge Ignacio López Jímenez",suplente:"Juan Francisco Godinez Cuevas"},
+                      {partido:"FCN-NACIÓN",casilla:"5",persona:"Ana Virginaia Morales Castillo ",suplente:"Carlos Alberto Castillo Molina "},
+                      {partido:"FCN-NACIÓN",casilla:"6",persona:"Diego Pérez Ajanel ",suplente:"Ana Sofía Morales Fernández "},
+                      {partido:"FCN-NACIÓN",casilla:"7",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"8",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"9",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"10",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"11",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"12",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"13",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"14",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"15",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"16",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"17",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"18",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"19",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FCN-NACIÓN",casilla:"20",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"1",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"2",persona:"Luis Felipe Miranda Maldonado",suplente:"Alicia Duque Cabrera"},
+                      {partido:"FUERZA",casilla:"3",persona:"Pedro Pablo Girón Polanco",suplente:"Miguel Angle Cabrera Reyes"},
+                      {partido:"FUERZA",casilla:"4",persona:"Rolando IsemChiquin",suplente:"Diego Mauricio Salazar Fonseca "},
+                      {partido:"FUERZA",casilla:"5",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"6",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"7",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"8",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"9",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"10",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"11",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"12",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"13",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"14",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"15",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"16",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"17",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"18",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"19",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"FUERZA",casilla:"20",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VALOR",casilla:"1",persona:"Ana Ingrid Bernat Cofiño",suplente:"Ana Fernanda Mejía Sandoval "},
+                      {partido:"VALOR",casilla:"2",persona:"Virgina Paola de la Torre Buonafina",suplente:"Léon Alexander Ostrowiak Harari "},
+                      {partido:"VALOR",casilla:"3",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VALOR",casilla:"4",persona:"José Nicolás Rompiche de León",suplente:"Jessica Roxana Mayen Alvarado"},
+                      {partido:"VALOR",casilla:"5",persona:"Elena María Garcés de Marcilla Amaro",suplente:"Rubén Darío Pereira Dubón"},
+                      {partido:"VALOR",casilla:"6",persona:"Alfred Stephan Kaltschmitt Palma",suplente:"Claudia María Gándara García"},
+                      {partido:"VALOR",casilla:"7",persona:"Oscar Benjamín Pérez López",suplente:"Herbert Rolando Mejia Ovalle"},
+                      {partido:"VALOR",casilla:"8",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VALOR",casilla:"9",persona:"Gloria Alejandra Siquinajay Laynez",suplente:"Pabo Joaquin Pellecer Larrañaga"},
+                      {partido:"VALOR",casilla:"10",persona:"Variania Eugenia Sandoval Gómez",suplente:"Gladys Alicia Fuentes Guevara"},
+                      {partido:"VALOR",casilla:"11",persona:"Cateryne Gabriela Galindo Romero",suplente:"Manuel Enroque Santizo Reyna"},
+                      {partido:"VALOR",casilla:"12",persona:"Adolfo René Tejeda Rivas",suplente:"Victor Fernando Hernández Cuyún"},
+                      {partido:"VALOR",casilla:"13",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VALOR",casilla:"14",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VALOR",casilla:"15",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VALOR",casilla:"16",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VALOR",casilla:"17",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VALOR",casilla:"18",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VALOR",casilla:"19",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VALOR",casilla:"20",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VAMOS",casilla:"1",persona:"Camilo JohanesDedetCasprowitz",suplente:"Neftali Alarcón Sandoval"},
+                      {partido:"VAMOS",casilla:"2",persona:"Julio Armando Hernández Castro",suplente:"Monica Gabriela Broncy García"},
+                      {partido:"VAMOS",casilla:"3",persona:"Sonia Argentina Segura Varsoly",suplente:"Maria Roxana Romero Segura"},
+                      {partido:"VAMOS",casilla:"4",persona:"Bany Paula Patricia Mejía Siliezar",suplente:"Carlos Enrique Quino Pérez"},
+                      {partido:"VAMOS",casilla:"5",persona:"Silvana María Ayuso de León",suplente:"Laila NeshéBassila Ayuso"},
+                      {partido:"VAMOS",casilla:"6",persona:"Ingrid Elizabeth de León Flores",suplente:"Manuel Bernardo Valdéz González"},
+                      {partido:"VAMOS",casilla:"7",persona:"Romelia Elena Valle Alegría",suplente:"Evelyn Fabiola Barrientos Vargas de Valle"},
+                      {partido:"VAMOS",casilla:"8",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VAMOS",casilla:"9",persona:"Karla Johanna Alvarado",suplente:"Pablo Emilio Pérez Aguilar"},
+                      {partido:"VAMOS",casilla:"10",persona:"Víctor Manuel Álvarez Pineda",suplente:"Luis Mariano Martínez Calderón"},
+                      {partido:"VAMOS",casilla:"11",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VAMOS",casilla:"12",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VAMOS",casilla:"13",persona:"Aleida Dalila Mazariegos Rojas",suplente:"Pablo Fernando Alquijay Rodríguez"},
+                      {partido:"VAMOS",casilla:"14",persona:"Byron Eduardo Orellana Orellana",suplente:"Carlos Eduardo Reyes Herrera"},
+                      {partido:"VAMOS",casilla:"15",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VAMOS",casilla:"16",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VAMOS",casilla:"17",persona:"Brian Erickson González Morales",suplente:"Jose Antonio Aguilar Posadas"},
+                      {partido:"VAMOS",casilla:"18",persona:"Vacante",suplente:"Vacante"},
+                      {partido:"VAMOS",casilla:"19",persona:"Erick Antonio Muñoz Orozco",suplente:"Raul Estuardo García Chávez"},
+                      {partido:"VAMOS",casilla:"20",persona:"Vacante",suplente:"Vacante"}];
+        gNacional = [{partido:"FCN-NACIÓN",hombres:"8", percentage:62},
+                      {partido:"FUERZA",hombres:"11", percentage:100},
+                      {partido:"TODOS",hombres:"8", percentage:80},
+                      {partido:"VALOR",hombres:"17", percentage:71},
+                      {partido:"VAMOS",hombres:"23", percentage:79},
+                      {partido:"WINAQ",hombres:"6", percentage:67},
+                      {partido:"FCN-NACIÓN",mujeres:"5", percentage:38},
+                      {partido:"FUERZA",mujeres:"0", percentage:0},
+                      {partido:"TODOS",mujeres:"2", percentage:20},
+                      {partido:"VALOR",mujeres:"7", percentage:29},
+                      {partido:"VAMOS",mujeres:"6", percentage:21},
+                      {partido:"WINAQ",mujeres:"3", percentage:33}];
+        gParlacen = [{partido:"VAMOS",razon:"Hombres",cantidad:"7"},
+                      {partido:"FCN-NACIÓN",razon:"Hombres",cantidad:"2"},
+                      {partido:"VALOR",razon:"Hombres",cantidad:"6"},
+                      {partido:"FUERZA",razon:"Hombres",cantidad:"3"},
+                      {partido:"VAMOS",razon:"Hombres suplentes",cantidad:"4"},
+                      {partido:"FCN-NACIÓN",razon:"Hombres suplentes",cantidad:"2"},
+                      {partido:"VALOR",razon:"Hombres suplentes",cantidad:"4"},
+                      {partido:"FUERZA",razon:"Hombres suplentes",cantidad:"1"},
+                      {partido:"VAMOS",razon:"Mujeres",cantidad:"6"},
+                      {partido:"FCN-NACIÓN",razon:"Mujeres",cantidad:"3"},
+                      {partido:"VALOR",razon:"Mujeres",cantidad:"4"},
+                      {partido:"FUERZA",razon:"Mujeres",cantidad:"0"},
+                      {partido:"VAMOS",razon:"Mujeres suplentes",cantidad:"9"},
+                      {partido:"FCN-NACIÓN",razon:"Mujeres suplentes",cantidad:"3"},
+                      {partido:"VALOR",razon:"Mujeres suplentes",cantidad:"6"},
+                      {partido:"FUERZA",razon:"Mujeres suplentes",cantidad:"2"}];
+        vNacional = [{partido:"FCN-NACIÓN",razon:"No se postularon candidatos",cantidad:"0"},
+                      {partido:"FCN-NACIÓN",razon:"Rechazo del TSE",cantidad:"6"},
+                      {partido:"FCN-NACIÓN",razon:"Adjudicadas",cantidad:"42"},
+                      {partido:"FCN-NACIÓN",razon:"No se presentó papelería ",cantidad:"52"},
+                      {partido:"FUERZA",razon:"No se postularon candidatos",cantidad:"0"},
+                      {partido:"FUERZA",razon:"Rechazo del TSE",cantidad:"0"},
+                      {partido:"FUERZA",razon:"Adjudicadas",cantidad:"35"},
+                      {partido:"FUERZA",razon:"No se presentó papelería ",cantidad:"65"},
+                      {partido:"TODOS",razon:"Rechazo del TSE",cantidad:"0"},
+                      {partido:"TODOS",razon:"Adjudicadas",cantidad:"27"},
+                      {partido:"TODOS",razon:"No se postularon candidatos",cantidad:"33"},
+                      {partido:"TODOS",razon:"No se presentó papelería ",cantidad:"40"},
+                      {partido:"VALOR",razon:"No se postularon candidatos",cantidad:"0"},
+                      {partido:"VALOR",razon:"Rechazo del TSE",cantidad:"3"},
+                      {partido:"VALOR",razon:"No se presentó papelería ",cantidad:"19"},
+                      {partido:"VALOR",razon:"Adjudicadas",cantidad:"78"},
+                      {partido:"VAMOS",razon:"No se postularon candidatos",cantidad:"0"},
+                      {partido:"VAMOS",razon:"Rechazo del TSE",cantidad:"0"},
+                      {partido:"VAMOS",razon:"Adjudicadas",cantidad:"94"},
+                      {partido:"VAMOS",razon:"No se presentó papelería ",cantidad:"6"},
+                      {partido:"WINAQ",razon:"No se presentó papelería ",cantidad:"3"},
+                      {partido:"WINAQ",razon:"Rechazo del TSE",cantidad:"3"},
+                      {partido:"WINAQ",razon:"Adjudicadas",cantidad:"29"},
+                      {partido:"WINAQ",razon:"No se postularon candidatos",cantidad:"65"}];
+        var partidos = [];
+        for (i=0; i<cNacional.length; i++) {
+          if(partidos.indexOf(cNacional[i].partido) === -1) {
+            partidos.push(cNacional[i].partido);
+          }
+        }
+        for (i=0; i<cParlacen.length; i++) {
+          if (partidos.indexOf(cParlacen[i].partido) === -1) {
+            partidos.push(cParlacen[i].partido);
+          }
+        }
+        partidos.sort();
+        partidos.forEach(function(element) {
+          jQuery('#parties').append('<button class="btn btn-link" data-toggle="collapse" data-target="#collapse'+element+'" role="button" aria-expanded="false">'+element+'</button><br/>');
+          jQuery('#parties').append('<div class="collapse row" id="collapse'+element+'"></div>');
+          jQuery('#collapse'+element).append('<div id="candidate-table" class="col-12 col-md-5"></div>');
+          jQuery('#collapse'+element+' #candidate-table').append('<div class="detail-header"><div class="header-candidato"></div><div class="header-candidato-n">Nombres de candidatos/as por Lista Nacional</div></div>');
+          jQuery('#collapse'+element+' #candidate-table').append('<div class="detail-body">');
+          for (i=0; i<cNacional.length; i++) {
+            if (cNacional[i]["partido"] == element){
+              jQuery('#collapse'+element+' #candidate-table').append("<div class='detail-row'><div class='candidato-num'>"+cNacional[i]["casilla"]+". </div><div class='candidato-name'>"+cNacional[i]["persona"]+"</div></div>");
+            }
+          }
+          jQuery('#collapse'+element+' #candidate-table').append("</div><!--detail-body-->");
+          jQuery('#collapse'+element).append('<div class="d-md-block col-md-1"></div>');
+          jQuery('#collapse'+element).append('<div id="candidate-graphs" class="col-12 col-md-6"><div class="row"><div id="candidato-genero" class="col-12"><div id="candidato-genero-inner"></div></div><div id="candidato-vacantes" class="col-12"></div></div></div>');
+
+          /*national-gender graph*/
+          var width = parseInt(d3.select('#collapse'+element+' #candidate-graphs .row #candidato-genero').style("width"));
+          var tmpbtn = jQuery('#collapse'+element+' #candidate-graphs .row #candidato-genero').clone().appendTo( "body" ).css({'display':'block', 'visibility': 'hidden'});
+          width = parseInt(tmpbtn.width());
+          if (width > 1000)
+            width = parseInt(width/2);
+          tmpbtn.remove();
+
+          var height = width * 0.5;
+          var radius = width * 0.25;
+          var svgPGenero = d3.select('#collapse'+element+' #candidate-graphs #candidato-genero')
+                .append('svg')
+                .attr('width', width + 'px')
+                .attr('height', height + 'px')
+                .append('g')
+                .attr('transform', 'translate(' + (width/2) + ',' + (height/2) + ')');
+
+          var tooltipGNacional = d3.select('#collapse'+element+' #candidate-graphs #candidato-genero').append('div')
+                .attr('id','tooltipGNacional')
+                .attr('class','tooltip');
+
+          var arc = d3.arc()
+                .outerRadius(radius - 10)
+                .innerRadius(radius - (radius/2));
+
+          var pie = d3.pie()
+                .sort(null)
+                .value(function(d) {
+                  if (d.hasOwnProperty('hombres'))
+                    return d.hombres;
+                  return d.mujeres;
+                });
+
+          var g = svgPGenero.selectAll(".arc")
+                .data(pie(jQuery(gNacional).filter(function(i,n) {
+                  return n.partido === element;
+                })))
+                .enter().append('g')
+                .on('mouseover', function(d,i) {
+                  tooltipGNacional.transition()
+                    .duration(200)
+                    .style("opacity", 1);
+                  var message;
+                  if (d.data.hasOwnProperty('hombres')) {
+                    message = d.data.hombres;
+                  }
+                  else {
+                    message = d.data.mujeres;
+                  }
+                  tooltipGNacional.html(message.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" personas")
+                        .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('#collapse'+element+' #candidate-graphs #candidato-genero').offset().left)+"px")
+                        .style("top", (event.pageY - jQuery('#collapse'+element+' #candidate-graphs #candidato-genero').offset().top)+"px");
+                })
+                .on('mouseout', function(d) {
+                  tooltipGNacional.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+
+          g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d,i) {
+              if (d.data.hasOwnProperty('hombres'))
+                return "#222c58";
+              return "#f7a520";
+            });
+
+          g.append("text")
+            .attr("transform", function(d) {
+              var _d = arc.centroid(d);
+              _d[0] *= 2;
+              _d[1] *= 1.5;
+              return "translate(" + _d + ")";
+            })
+            .attr("dy", "0.5em")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+              if (d.data.partido == element)
+                if (d.data.hasOwnProperty('hombres')) {
+                  return "Hombres: "+d.data.percentage+"%";
+                }
+                else {
+                  return "Mujeres: "+d.data.percentage+"%";
+                }
+            });
+
+          /*national-vacancy graph*/
+          var margin = {top: 20, right: 20, bottom: 30, left: 150};
+          var tmpbtn = jQuery('#collapse'+element+' #candidate-graphs .row #candidato-genero').clone().appendTo( "body" ).css({'display':'block', 'visibility': 'hidden'});
+          var width = parseInt(tmpbtn.width());
+          if (width > 1000)
+            width = parseInt(width/2) - margin.left - margin.right;;
+          tmpbtn.remove();
+
+          var height = width/2 - margin.top - margin.bottom;
+          var xScale = d3.scaleLinear()
+              .range([0, width])
+              .domain([0, d3.max(vNacional, function(d) { return d["cantidad"]; })]);
+          var yScale = d3.scaleBand()
+              .range([0, height])
+              .domain(vNacional.map(function(d) { return d["razon"]; }))
+              .padding(0.1);
+          var svgVacancy = d3.select('#collapse'+element+' #candidate-graphs #candidato-vacantes')
+                .append('svg')
+                .attr('width', width+margin.left+margin.right)
+                .attr('height', height+margin.top+margin.bottom)
+                .append('g')
+                .attr('transform', 'translate('+margin.left+','+margin.top+')');
+          var tooltipCyP = d3.select('#collapse'+element+' #candidate-graphs #candidato-vacantes').append("div")
+                .attr("id","tooltipCyP")
+                .attr("class","tooltip");
+          var g = svgVacancy.selectAll(".bar")
+                .data(jQuery(vNacional).filter(function(i,n) {
+                  return n.partido === element;
+                }))
+                .enter()
+                .append('rect')
+                .attr("class","bar")
+                .attr("y", function(d) { return yScale(d["razon"]); })
+                .attr("height", yScale.bandwidth() )
+                .attr("x", function(d) { return 0; })
+                .attr("width", function(d) { return xScale(parseInt(d["cantidad"])); })
+                .on('mouseover', function(d) {
+                  tooltipCyP.transition()
+                    .duration(200)
+                    .style("opacity", 1);
+                  tooltipCyP.html(d.cantidad.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"%")
+                      .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('#collapse'+element+' #candidate-graphs #candidato-vacantes').offset().left)+"px")
+                      .style("top", (event.pageY - jQuery('#collapse'+element+' #candidate-graphs #candidato-vacantes').offset().top)+"px");
+                })
+                .on('mouseout', function(d) {
+                  tooltipCyP.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+          svgVacancy.append("g")
+            .attr("transform", "translate(0, "+height+")")
+            .call(d3.axisBottom(xScale));
+            
+          svgVacancy.append("g")
+            .call(d3.axisLeft(yScale));
+
+          var hasParlacen = false;
+          for (i=0; i<cParlacen.length; i++) {
+            if (cParlacen[i]["partido"] == element){
+              hasParlacen = true;
+            }
+          }
+          
+          if (hasParlacen) {
+            /*parlacen list*/
+            jQuery('#collapse'+element).append('<div id="parlacen-table" class="col-12 col-md-5"></div>');
+            jQuery('#collapse'+element+' #parlacen-table').append('<div class="detail-header"><div class="header-candidato"></div><div class="header-candidato-n">Nombres de candidatos/as para Parlacen</div></div>');
+            jQuery('#collapse'+element+' #parlacen-table').append('<div class="detail-body">');
+            for (i=0; i<cParlacen.length; i++) {
+              if (cParlacen[i]["partido"] == element){
+                jQuery('#collapse'+element+' #parlacen-table').append("<div class='detail-row'><div class='candidato-num'>"+cParlacen[i]["casilla"]+". </div><div class='candidato-name'>"+cParlacen[i]["persona"]+"</div><br/><div class='candidato-suplente'>suplente: "+cParlacen[i]["suplente"]+"</div></div>");
+              }
+            }
+            jQuery('#collapse'+element+' #parlacen-table').append("</div><!--detail-body-->");
+            jQuery('#collapse'+element).append('<div class="d-md-block col-md-1"></div>');
+            jQuery('#collapse'+element).append('<div id="parlacen-graphs" class="col-12 col-md-6"><div class="row"><div id="parlacen-genero" class="col-12"></div></div></div>');
+
+            /*parlacen gender*/
+            var margin = {top: 20, right: 20, bottom: 30, left: 150};
+            var tmpbtn = jQuery('#collapse'+element+' #candidate-graphs .row #candidato-genero').clone().appendTo( "body" ).css({'display':'block', 'visibility': 'hidden'});
+            var width = parseInt(tmpbtn.width());
+            if (width > 1000)
+              width = parseInt(width/2) - margin.left - margin.right;;
+            tmpbtn.remove();
+
+            var height = width/2 - margin.top - margin.bottom;
+            var xScale = d3.scaleLinear()
+                .range([0, width])
+                .domain([0, d3.max(gParlacen, function(d) { return d["cantidad"]; })]);
+            var yScale = d3.scaleBand()
+                .range([0, height])
+                .domain(gParlacen.map(function(d) { return d["razon"]; }))
+                .padding(0.1);
+            var svgPGender = d3.select('#collapse'+element+' #parlacen-graphs #parlacen-genero')
+                  .append('svg')
+                  .attr('width', width+margin.left+margin.right)
+                  .attr('height', height+margin.top+margin.bottom)
+                  .append('g')
+                  .attr('transform', 'translate('+margin.left+','+margin.top+')');
+            var tooltipPG = d3.select('#collapse'+element+' #parlacen-graphs #parlacen-genero').append("div")
+                  .attr("id","tooltipPG")
+                  .attr("class","tooltip");
+            var g = svgPGender.selectAll(".bar")
+                  .sort("razon")
+                  .data(jQuery(gParlacen).filter(function(i,n) {
+                    return n.partido === element;
+                  }))
+                  .enter()
+                  .append('rect')
+                  .attr("fill", function(d) {
+                    if ((d.razon == 'Hombres')||(d.razon == 'Mujeres')) {
+                      return "#f7a520";
+                    }
+                    else {
+                      return "#222c58"
+                    } 
+                   })
+                  .attr("y", function(d) { return yScale(d["razon"]); })
+                  .attr("height", yScale.bandwidth() )
+                  .attr("x", function(d) { return 0; })
+                  .attr("width", function(d) { return xScale(parseInt(d["cantidad"])); })
+                  .on('mouseover', function(d,i) {
+                    tooltipPG.transition()
+                      .duration(200)
+                      .style("opacity", 1);
+                    tooltipPG.html(d.cantidad.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" personas")
+                        .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('#collapse'+element+' #parlacen-graphs #parlacen-genero').offset().left)+"px")
+                        .style("top", (event.pageY - jQuery('#collapse'+element+' #parlacen-graphs #parlacen-genero').offset().top)+"px");
+                  })
+                  .on('mouseout', function(d) {
+                    tooltipPG.transition()
+                      .duration(500)
+                      .style("opacity",0);
+                  });
+            svgPGender.append("g")
+              .attr("transform", "translate(0, "+height+")")
+              .call(d3.axisBottom(xScale));
+              
+            svgPGender.append("g")
+              .call(d3.axisLeft(yScale));
+          }
+
+        });
+      </script>
     </div>
   </div>
 </div>

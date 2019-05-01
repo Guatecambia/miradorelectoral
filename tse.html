@@ -123,13 +123,13 @@ id: tse
         </div>
       </div>
     </div>
+    <div class="row viz-separator"></div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 col-lg-6">
         <h2>Padrón electoral</h2>
+        <br/><br/>
         <p>El número de empadronados al 17 de marzo es de 7,953,187 distribuido en 4, 272,208 mujeres correspondiente al 53.72%, y 3,680,979 hombres correspondiente al 46.28 %</p>
       </div>
-    </div>
-    <div class="row justify-content-center">
       <div class="col-12 col-lg-6">
         <div id="padron2019"></div>
         <script type="text/javascript">
@@ -138,9 +138,10 @@ id: tse
                 {name: 'Mujeres', count: 4272208, percentage: 53.7, color: "#f7a520"},
               ];
           var width = parseInt(d3.select("#padron2019").style("width"));
-          var height = width * 0.75;
-          var radius = (Math.min(width, height) / 2);
-          var radius = radius * 0.4;
+          if (width > 1000)
+            width = width/2;
+          var height = width * 0.5;
+          var radius = (width * 0.25);
           var svgPadron = d3.select("div#padron2019")
                 .append('svg')
                 .attr('width', width)
@@ -200,13 +201,13 @@ id: tse
         </script>
       </div>
     </div>
+    <div class="row viz-separator"></div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 col-lg-6">
         <h2>Crecimiento en el padrón</h2>
+        <br/><br/>
         <p>El total de empadronados a la fecha establecida fue de 7,678,069 cifra que refleja un incremento inter electoral respecto del 31 de diciembre del año 2014 de 2.28% habiéndose empadronado durante cuatro años 171,173 nuevos ciudadanos.</p>
       </div>
-    </div>
-    <div class="row justify-content-center">
       <div class="col-12 col-lg-6">
         <div id="padronComparativo"></div>
         <script type="text/javascript">
@@ -218,6 +219,8 @@ id: tse
               ];
           var margin = {top: 20, right: 20, bottom: 30, left: 70};
           var width = parseInt(d3.select("#padronComparativo").style("width")) - margin.left - margin.right;
+          if (width > 1000)
+            width = width/2;
           var height = width/2 - margin.top - margin.bottom;
           var yScale = d3.scaleLinear()
               .range([height, 0])
@@ -266,8 +269,839 @@ id: tse
         </script>
       </div>
     </div>
+    <div class="row viz-separator"></div>
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <h2>Calendario electoral</h2>
+        <br/><br/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 d-none d-lg-block">
+        <div id="l1" class="info-square" data-toggle="modal" data-target="#l1Modal">
+          <span class="square-title">20 de enero al 17 de abril</span>
+          Constitución de Comités Civicos Electorales. Art. 108 1 dia posterior a la convocatoria, finaliza 60 días antes de la elección
+        </div>
+        <div id="l2" class="info-square" data-toggle="modal" data-target="#l2Modal">
+          <span class="square-title">finaliza 16 de abril</span>
+          Integración de Juntas Electorales Municipales.Art. 179.
+        </div>
+        <div id="l3" class="info-square" data-toggle="modal" data-target="#l3Modal">
+          <span class="square-title">17 de abril</span>
+          finaliza número de Juntas Receptoras de Votos. Art.229. finaliza 60 días antes de elección.
+        </div>
+        <div id="l4" class="info-square" data-toggle="modal" data-target="#l4Modal">
+          <span class="square-title">1 de junio</span>
+          Integración de Juntas Receptoras de Votos. Art. 181 Último día que se pueden publicar encuestas. Publicación de Encuestas.Art. 223
+        </div>
+        <div id="l5" class="info-square" data-toggle="modal" data-target="#l5Modal">
+          Prohibición y expendio de licores. Art. 223
+        </div>
+        <div id="l6" class="info-square" data-toggle="modal" data-target="#l6Modal">
+          <span class="square-title">17 a 21 de junio</span>
+          Audiencia de Revisión de escrutinios. Art. 237. <br/>Conclusión y divulgación de resultados. Art.245
+        </div>
+        <div id="l7" class="info-square" data-toggle="modal" data-target="#l7Modal">
+          <span class="square-title">11 de agosto</span>
+          segunda elección Presidente y Vicepresidente de la República. Art. 201
+        </div>
+        <div id="l8" class="info-square" data-toggle="modal" data-target="#l8Modal">
+          <span class="square-title">Septiembre</span>
+          Inscripción de candidatos.(repetición por voto nulo). Art. 210
+        </div>
+        <div id="l9" class="info-square" data-toggle="modal" data-target="#l9Modal">
+          <span class="square-title">1 de noviembre al 31 de diciembre</span>
+          Conclusión y divulgación de resultados. Art. 245
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div id="calendar-line">
+          <script type="text/javascript">
+            var data = [
+                  {name: 'l1', x: 149, y: 112, yf: 429},
+                  {name: 'l2', x: 112, y: 403, yf: 416},
+                  {name: 'l3', x: 112, y: 416, yf: 429},
+                  {name: 'l4', x: 149, y: 566, yf: 579},
+                  {name: 'l5', x: 149, y: 609, yf: 623},
+                  {name: 'l6', x: 149, y: 636, yf: 662},
+                  {name: 'l7', x: 149, y: 820, yf: 833},
+                  {name: 'l8', x: 149, y: 895, yf: 1003},
+                  {name: 'l9', x: 149, y: 1111, yf: 1307},
+                  {name: 'r1', x: 217, y: 304, yf: 317},
+                  {name: 'r2', x: 217, y: 317, yf: 623},
+                  {name: 'r3', x: 249, y: 355, yf: 465},
+                  {name: 'r4', x: 249, y: 521, yf: 534},
+                  {name: 'r5', x: 249, y: 611, yf: 623},
+                  {name: 'r6', x: 217, y: 677, yf: 689},
+                  {name: 'r7', x: 217, y: 788, yf: 890},
+                  {name: 'r8', x: 217, y: 1003, yf: 1100},
+                  {name: 'r9', x: 217, y: 1218, yf: 1310}
+                ];
+            var svgCalendar = d3.select("#calendar-line").append("svg")
+                .attr("width", 380)
+                .attr("height", 1315);
+            svgCalendar.selectAll(".bar")
+                        .data(data)
+                        .enter()
+                        .append("rect")
+                        .attr("class", ".bar")
+                        .attr("fill", "#ddd")
+                        .attr("class", function(d) { return d["name"] })
+                        .attr("x", function(d) { return d["x"]; })
+                        .attr("y", function(d) { return d["y"]; })
+                        .attr("width", 20)
+                        .attr("height", function(d) { return (d["yf"] - d["y"]); })
+                        .on('mouseover', function(d) {
+                          d3.select(this).attr("fill", "#222c58");
+                          jQuery('#'+d.name).addClass("active");
+                        })
+                        .on('mouseout', function(d) {
+                          d3.select(this).attr("fill", "#ddd");
+                          jQuery('#'+d.name).removeClass("active");
+                        })
+                        .on('click', function(d) {
+                          jQuery('#'+d.name+'Modal').modal('show')
+                        });
+          </script>
+        </div>
+      </div>
+      <div class="col-lg-4 d-none d-lg-block">
+        <div id="r1" class="info-square" data-toggle="modal" data-target="#r1Modal">
+          <span class="square-title">17 de marzo</span>
+          finaliza Integración de Juntas Electorales Departamentales. Art. 179
+        </div>
+        <div id="r2" class="info-square" data-toggle="modal" data-target="#r2Modal">
+          <span class="square-title">18 de marzo</span>
+          inicia período de propaganda electoral, finaliza 36 horas antes a la elección Art. 196
+        </div>
+        <div id="r3" class="info-square" data-toggle="modal" data-target="#r3Modal">
+          <span class="square-title">Abril</span>
+          Conclusión de depuración del Padrón Electoral, su impresión y publicación Art. 225
+        </div>
+        <div id="r4" class="info-square" data-toggle="modal" data-target="#r4Modal">
+          <span class="square-title">17 de mayo</span>
+          Publicidad del Financiamiento. Art. 21
+        </div>
+        <div id="r5" class="info-square" data-toggle="modal" data-target="#r5Modal">
+          <span class="square-title">16 de junio</span>
+          celebración de las elecciones Art. 196 <br/> Inicio y cierre de votación. Art. 236 <br/> Escrutinio. Art. 237 
+          <br/> De la comunicación de los resultados por parte de las JRV's. Art. 240
+        </div>
+        <div id="r6" class="info-square" data-toggle="modal" data-target="#r6Modal">
+          Convocatoria a repetición de proceso electoral Art. 210 (repetición por voto nulo)
+        </div>
+        <div id="r7" class="info-square" data-toggle="modal" data-target="#r7Modal">
+          <span class="square-title">Agosto</span>
+          Asambleas generales extraordinarias. Art. 210 (repetición por voto nulo)
+        </div>
+        <div id="r8" class="info-square" data-toggle="modal" data-target="#r8Modal">
+          <span class="square-title">Octubre</span>
+          repetición elección de presidente y vicepresidente y otros casos que procedan con voto nulo. Art. 196
+        </div>
+        <div id="r9" class="info-square" data-toggle="modal" data-target="#r9Modal">
+          Segunda elección presidente y vicepresidente (voto nulo)
+        </div>
+        <script type="text/javascript">
+          jQuery('.info-square').hover(
+            function(){
+              jQuery(this).addClass('active');
+              d3.select('.'+jQuery(this).attr('id')).attr("fill","#222c58");
+            },
+            function(){
+              jQuery(this).removeClass('active');
+              d3.select('.'+jQuery(this).attr('id')).attr("fill","#ddd");
+            }
+          );
+        </script>
+      </div>
+    </div>
   </div>
 </div>
+<!-- Modals -->
+<div class="modal fade" id="l1Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">20 de enero al 17 de abril</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 108. Plazo para la constitución e inscripción de comité.</span>La constitución e inscripción de un comité cívico deberá hacerse, a más tardar,
+sesenta días antes de la fecha señalada para la elección. No se podrán constituir
+comités cívicos antes de la convocatoria a elecciones.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="l2Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">finaliza 16 de abril</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 179. Plazo para integrar las Juntas Electorales
+Departamentales y las Juntas Electorales Municipales. </span>El Tribunal
+Supremo Electoral deberá integrar las Juntas Electorales Departamentales con
+por lo menos tres meses de anticipación y las Juntas Electorales Municipales
+con por lo menos dos meses de antelación, a la fecha en que ha de realizarse la
+elección de que se trate.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="l3Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">17 de abril</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 229. Número de juntas receptoras de votos.</span>A más tardar
+sesenta días antes de la fecha fijada para la celebración del sufragio, el Tribunal
+Supremo Electoral determinará la cantidad necesaria de juntas receptoras de votos para cada municipio y se la comunicará inmediatamente a los fiscales
+nacionales de los partidos políticos y a las juntas electorales departamentales y
+municipales, para que éstas procedan a la instalación de las mismas.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="l4Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">1 de junio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 181. Integración de las Juntas Receptoras de Votos. </span>
+        Cada junta Receptora de Votos estará integrada por tres miembros titulares, que
+serán nombrados por la Junta Electoral Municipal correspondiente y quienes
+desempeñarán los cargos de Presidente, Secretario y Vocal respectivamente,
+debiéndose integrar a más tardar, quince días antes de la fecha de la elección
+correspondiente.<br/>En la misma forma se designará para cada municipio el número de suplentes
+para las juntas receptoras de votos que acuerde la respectiva junta electoral
+municipal, quienes sustituirán a los ausentes el día de la elección, en la forma
+como disponga dicha junta.<br/><br/>
+      <span class="bold">Artículo 223. De las prohibiciones.</span>Durante cualquier proceso
+electoral es terminantemente prohibido:
+      <ol type="a">
+        <li>Hacer propaganda electoral pegando o pintando rótulos en efigies, paredes,
+señales, rótulos, puentes y monumentos, salvo que se trate de propiedad
+privada y se cuente con autorización del dueño.</li>
+        <li>Usar vehículos de cualquier tipo, con altoparlantes, para fines de propaganda,
+antes de las siete y después de las veinte horas.</li>
+        <li>Realizar propaganda electoral de cualquier clase al día de las elecciones
+generales y al Parlamento Centroamericano, y durante las treinta y seis
+horas anteriores al mismo. Las encuestas electorales no podrán ser
+publicadas por ninguna entidad o empresa durante los quince días previos
+al de las elecciones y durante los últimos quince días antes de la segunda
+elección presidencial, si ésta tuviera lugar de acuerdo a esta Ley.</li>
+        <li>El expendio o distribución de licores, bebidas alcohólicas y fermentadas o
+su consumo en lugares públicos, desde las doce horas del día anterior a las
+elecciones y hasta las seis horas del día siguiente a ésta.</li>
+        <li>Usar los recursos y bienes del Estado para propaganda electoral.</li>
+        <li>A los funcionarios y empleados públicos, dedicarse durante la jornada de
+trabajo a funciones o actividades de carácter político electoral, así como
+emplear su autoridad o influencia a favor o en perjuicio de determinado
+candidato u organización política.</li>
+        <li>A los miembros del Ejército y de los cuerpos de seguridad del Estado o
+sus instituciones, participar en actos de carácter político o de propaganda
+electoral.</li>
+        <li>A los empleados y funcionarios públicos, así como a los contratistas del
+Estado, informar, dar a conocer o inaugurar públicamente obras realizadas en
+cumplimiento de sus funciones y participar de cualquier forma en publicidad
+o propaganda de las actividades, gestión u obras realizadas.</li>
+        <li>Hacer propaganda anónima, y en toda publicación efectuada en los medios
+de comunicación social, deberá señalarse el nombre del responsable.</li>
+        <li>Limitar el uso gratuito para colocación de propaganda en los postes, salvo la
+propaganda que se coloque de poste a poste, la cual está prohibida.</li>
+        <li>Las demás actividades que determine la ley</li>
+        <li>Hacer propaganda electoral por interpósita persona, fundaciones,
+asociaciones o cualquier otra figura legal. En toda publicación efectuada
+en los medios de comunicación social, deberá señalarse el nombre del
+responsable, en el caso de las personas jurídicas, la propaganda debe ser
+respaldada con la firma del representante legal.</li>
+        <li>Otorgar u ofrecer prebendas, regalos o cualquier otra retribución que
+implique clientelismo con fines electorales.</li>
+        <li>Realizar actividades de propaganda anticipada.</li>
+        <li>La utilización de los colores y tipografía que identifiquen a una organización
+política en las actividades, documentos, publicidad, medios electrónicos o
+cualquier publicación en las que se identifique o dé a conocer la ejecución
+de programas o actividades oficiales.</li>
+        <li>Rotular instalaciones o vehículos oficiales con el nombre de cualquier
+funcionario público.</li>
+        <li>Denominar obras, proyectos o cualquier actividad pública con el nombre de
+un funcionario mientras no haya transcurrido dos periodos de haber dejado
+el ejercicio del cargo.</li>
+      </ol>
+                La infracción a cualquiera de estas prohibiciones se sancionará de conformidad
+  con lo dispuesto en esta Ley.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="l5Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Prohibición y expendio de licores. Art. 223</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 223. De las prohibiciones.</span>Durante cualquier proceso
+  electoral es terminantemente prohibido:
+        <ol type="a">
+          <li>Hacer propaganda electoral pegando o pintando rótulos en efigies, paredes,
+  señales, rótulos, puentes y monumentos, salvo que se trate de propiedad
+  privada y se cuente con autorización del dueño.</li>
+          <li>Usar vehículos de cualquier tipo, con altoparlantes, para fines de propaganda,
+  antes de las siete y después de las veinte horas.</li>
+          <li>Realizar propaganda electoral de cualquier clase al día de las elecciones
+  generales y al Parlamento Centroamericano, y durante las treinta y seis
+  horas anteriores al mismo. Las encuestas electorales no podrán ser
+  publicadas por ninguna entidad o empresa durante los quince días previos
+  al de las elecciones y durante los últimos quince días antes de la segunda
+  elección presidencial, si ésta tuviera lugar de acuerdo a esta Ley.</li>
+          <li>El expendio o distribución de licores, bebidas alcohólicas y fermentadas o
+  su consumo en lugares públicos, desde las doce horas del día anterior a las
+  elecciones y hasta las seis horas del día siguiente a ésta.</li>
+          <li>Usar los recursos y bienes del Estado para propaganda electoral.</li>
+          <li>A los funcionarios y empleados públicos, dedicarse durante la jornada de
+  trabajo a funciones o actividades de carácter político electoral, así como
+  emplear su autoridad o influencia a favor o en perjuicio de determinado
+  candidato u organización política.</li>
+          <li>A los miembros del Ejército y de los cuerpos de seguridad del Estado o
+  sus instituciones, participar en actos de carácter político o de propaganda
+  electoral.</li>
+          <li>A los empleados y funcionarios públicos, así como a los contratistas del
+  Estado, informar, dar a conocer o inaugurar públicamente obras realizadas en
+  cumplimiento de sus funciones y participar de cualquier forma en publicidad
+  o propaganda de las actividades, gestión u obras realizadas.</li>
+          <li>Hacer propaganda anónima, y en toda publicación efectuada en los medios
+  de comunicación social, deberá señalarse el nombre del responsable.</li>
+          <li>Limitar el uso gratuito para colocación de propaganda en los postes, salvo la
+  propaganda que se coloque de poste a poste, la cual está prohibida.</li>
+          <li>Las demás actividades que determine la ley</li>
+          <li>Hacer propaganda electoral por interpósita persona, fundaciones,
+  asociaciones o cualquier otra figura legal. En toda publicación efectuada
+  en los medios de comunicación social, deberá señalarse el nombre del
+  responsable, en el caso de las personas jurídicas, la propaganda debe ser
+  respaldada con la firma del representante legal.</li>
+          <li>Otorgar u ofrecer prebendas, regalos o cualquier otra retribución que
+  implique clientelismo con fines electorales.</li>
+          <li>Realizar actividades de propaganda anticipada.</li>
+          <li>La utilización de los colores y tipografía que identifiquen a una organización
+  política en las actividades, documentos, publicidad, medios electrónicos o
+  cualquier publicación en las que se identifique o dé a conocer la ejecución
+  de programas o actividades oficiales.</li>
+          <li>Rotular instalaciones o vehículos oficiales con el nombre de cualquier
+  funcionario público.</li>
+          <li>Denominar obras, proyectos o cualquier actividad pública con el nombre de
+  un funcionario mientras no haya transcurrido dos periodos de haber dejado
+  el ejercicio del cargo.</li>
+        </ol>
+                  La infracción a cualquiera de estas prohibiciones se sancionará de conformidad
+    con lo dispuesto en esta Ley.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="l6Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">17 a 21 de junio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 237. Del escrutinio. </span>Cerrada la votación, los miembros de la
+Junta Receptora de Votos procederán a la apertura de las urnas y al escrutinio
+de votos, comprobando que coinciden con el número de votantes, y en su caso,
+consignando en el acta cualquier diferencia; luego, se procederá a contar los
+votos emitidos a favor de cada planilla, los votos que se encuentren en blanco
+y los votos nulos.<br/> “Será voto en blanco todo aquel que no represente ninguna marca o signo en
+la papeleta. Será nulo todo voto que no esté marcado claramente con una X,
+un círculo u otro signo adecuado, cuando el signo abarque más de una planilla,
+a menos que esté clara la intención de voto, o cuando la papeleta contenga
+modificaciones, expresiones, signos o figuras ajenas al proceso. El voto nulo
+tiene validez jurídica, a efecto de determinar la repetición de la elección. <br/>Serán inválidos y carecerán de efectos jurídicos, los votos que no estén
+consignados en boletas legítimas, aquellos que pertenezcan a distrito electoral
+diferente o que no correspondan a la Junta Receptora de Votos de que se
+trate, así como aquellos votos que en cualquier forma revelen la identidad del
+votante.<br/><br/>
+        <span class="bold">Artículo 245. Divulgación de resultados.</span>El Tribunal Supremo Electoral
+está obligado a divulgar por todos los medios de comunicación, los resultados
+electorales, parciales y definitivos, dentro del plazo de ocho días siguientes a la
+terminación del proceso electoral.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="l7Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">11 de agosto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 201. De la mayoría absoluta. </span>Este sistema, aplicable tan sólo
+a las elecciones de Presidente y Vicepresidente de la República, consiste en que
+la planilla triunfadora deberá obtener, por lo menos, la mitad más uno de los
+votos válidos emitidos. Si en la primera elección ninguna de las planillas obtuviere
+tal mayoría, deberá llevarse a cabo la segunda elección con las dos planillas
+que hayan alcanzado la mayor cantidad de sufragios, en un plazo no mayor de
+sesenta días ni menor de cuarenta y cinco y conforme a la convocatoria, en la
+que sólo figurarán postuladas las planillas que hayan alcanzado mayor cantidad
+de votos en los primeros comicios, y ganará la elección la planilla que obtenga a
+su favor, por lo menos, la mitad más uno de los votos válidos.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="l8Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Septiembre</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 210. De la repetición de un proceso electoral. </span>Declarada
+la nulidad de una elección por el Tribunal Supremo Electoral se repetirá ésta, y
+para tal efecto se hará la convocatoria correspondiente dentro del plazo de
+quince días a contar de la declaratoria de nulidad, y la nueva elección se llevará
+a cabo dentro de los sesenta días siguientes.<br/>Si la elección se repitiese como consecuencia del porcentaje de la suma de
+votos nulos, se hará la convocatoria a elecciones dentro del plazo de diez días
+a contar de la declaratoria de nulidad; la celebración de asambleas generales
+extraordinarias que correspondan finaliza sesenta días antes de la fecha en
+que se celebren las elecciones; los treinta días siguientes para inscripción de
+candidatos; y, las elecciones se efectuarán un domingo del mes de octubre del
+mismo año.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="l9Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">1 de noviembre al 31 de diciembre</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 245. Divulgación de resultados.</span>El Tribunal Supremo Electoral
+está obligado a divulgar por todos los medios de comunicación, los resultados
+electorales, parciales y definitivos, dentro del plazo de ocho días siguientes a la
+terminación del proceso electoral.
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div><div class="modal fade" id="r1Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">17 de marzo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 179. Plazo para integrar las Juntas Electorales
+Departamentales y las Juntas Electorales Municipales. </span>El Tribunal
+Supremo Electoral deberá integrar las Juntas Electorales Departamentales con
+por lo menos tres meses de anticipación y las Juntas Electorales Municipales
+con por lo menos dos meses de antelación, a la fecha en que ha de realizarse la
+elección de que se trate.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="r2Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">18 de marzo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 196. De la convocatoria.</span> El proceso electoral para elecciones
+generales y diputados al Parlamento Centroamericano, dará inicio con la
+convocatoria, la cual será dictada por el Tribunal Supremo Electoral la segunda o
+tercera semana del mes de enero del año en el que se celebren dichas elecciones.
+El proceso electoral se dividirá en tres fases:
+        <ol type="a">
+          <li>La primera, concerniente al proceso de postulación e inscripción de
+candidaturas a cargos de elección popular, que dará inicio un día después
+de la convocatoria y terminará un día antes del inicio de la segunda fase
+definida en la literal b) de este artículo; en este periodo es prohibida la
+realización de propaganda electoral.</li>
+          <li>La segunda fase será para la campaña electoral de todos los candidatos a
+cargos de elección popular, que dará inicio noventa días antes de la fecha en
+que se celebren las elecciones generales hasta treinta y seis horas antes de
+la elección convocada.</li>
+          <li>La tercera fase comprende la realización de las elecciones, cómputo y
+calificación de los votos emitidos. Las elecciones generales y diputados al
+Parlamento Centroamericano se efectuarán un domingo del mes de junio
+del mismo año.</li>
+        </ol>
+        Si el voto nulo obtuviere la mayoría requerida, se repetirá la elección en los
+casos que procediere, efectuándose un domingo del mes de octubre del mismo
+año. <br/> Si no se diera la repetición de la elección presidencial pero sí, de las elecciones
+municipales de alcaldes y síndicos o de diputados, por listado nacional, por
+planilla distrital, o a diputados del Parlamento Centroamericano, las mismas se
+podrán realizar conjuntamente con la segunda elección presidencial. <br/> 
+        En el decreto de convocatoria, el Tribunal Supremo Electoral fijará la fecha de
+cada fase del proceso electoral y de los eventos que en cada una correspondan,
+especialmente lo previsto en el artículo 215 de esta Ley. </br>
+        El decreto de convocatoria para la elección de diputados a la Asamblea Nacional
+Constituyente y de consulta popular se dictará con una anticipación no menor
+de noventa días a la fecha de celebración.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="r3Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Abril</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 225. De la impresión, publicidad y gratuidad del padrón
+electoral.</span> El padrón electoral debe ser depurado entre la primera y la segunda
+semana del mes de abril del año en que se realiza la elección. <br/>El padrón electoral será impreso y publicado por el Registro de Ciudadanos,
+a más tardar la cuarta semana del mes de abril de ese mismo año, debiendo
+entregar una copia a cada organización política. </br>El padrón electoral es público, por lo que podrá ser consultado por cualquier
+ciudadano interesado; el Registro de Ciudadanos facilitará los mecanismos para
+hacer efectiva dicha consulta.<br/>Finalizado el proceso electoral y al quedar abierta la actividad de empadronamiento,
+se abre también el período de tachas y reclamos con lo cual el ciudadano podrá
+establecer su situación dentro del padrón y tendrá la oportunidad de solicitar
+las correcciones pertinentes a su situación. Las organizaciones políticas tienen
+la obligación de coadyuvar a la realización de esta actividad. Este período finaliza
+al quedar suspendida la actividad de empadronamiento previo a la fecha de la
+elección conforme lo establece la ley.<br/>Todas las operaciones relativas a la inscripción, supresión y traslado de ciudadanos
+en el padrón electoral y la extensión de las constancias de inscripciones, serán
+efectuadas por el Registro de Ciudadanos sin costo alguno para los interesados.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="r4Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">17 de mayo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 21. De su constitución. </span>Al haber alcanzado el mínimo de
+adherentes establecidos en la ley y la organización partidaria a que se refieren
+los artículos 19 literal a) y 49 de la Ley Electoral, la organización política deberá
+otorgar la escritura constitutiva del partido, la que se autorizará con base en la
+minuta previamente revisada por el Registro de Ciudadanos.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="r5Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">16 de junio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 196. De la convocatoria.</span> El proceso electoral para elecciones
+generales y diputados al Parlamento Centroamericano, dará inicio con la
+convocatoria, la cual será dictada por el Tribunal Supremo Electoral la segunda o
+tercera semana del mes de enero del año en el que se celebren dichas elecciones.
+El proceso electoral se dividirá en tres fases:
+        <ol type="a">
+          <li>La primera, concerniente al proceso de postulación e inscripción de
+candidaturas a cargos de elección popular, que dará inicio un día después
+de la convocatoria y terminará un día antes del inicio de la segunda fase
+definida en la literal b) de este artículo; en este periodo es prohibida la
+realización de propaganda electoral.</li>
+          <li>La segunda fase será para la campaña electoral de todos los candidatos a
+cargos de elección popular, que dará inicio noventa días antes de la fecha en
+que se celebren las elecciones generales hasta treinta y seis horas antes de
+la elección convocada.</li>
+          <li>La tercera fase comprende la realización de las elecciones, cómputo y
+calificación de los votos emitidos. Las elecciones generales y diputados al
+Parlamento Centroamericano se efectuarán un domingo del mes de junio
+del mismo año.</li>
+        </ol>
+        Si el voto nulo obtuviere la mayoría requerida, se repetirá la elección en los
+casos que procediere, efectuándose un domingo del mes de octubre del mismo
+año. <br/> Si no se diera la repetición de la elección presidencial pero sí, de las elecciones
+municipales de alcaldes y síndicos o de diputados, por listado nacional, por
+planilla distrital, o a diputados del Parlamento Centroamericano, las mismas se
+podrán realizar conjuntamente con la segunda elección presidencial. <br/> 
+        En el decreto de convocatoria, el Tribunal Supremo Electoral fijará la fecha de
+cada fase del proceso electoral y de los eventos que en cada una correspondan,
+especialmente lo previsto en el artículo 215 de esta Ley. </br>
+        El decreto de convocatoria para la elección de diputados a la Asamblea Nacional
+Constituyente y de consulta popular se dictará con una anticipación no menor
+de noventa días a la fecha de celebración. <br/><br/>
+        <span class="bold">Artículo 236. Del inicio y cierre de la votación. </span>La votación se
+deberá iniciar en todas las juntas receptoras de votos a las siete horas del día
+señalado. El cierre del centro de votaciones será a las dieciocho horas, pero
+tendrán derecho a ejercer el sufragio las personas que en ese momento estén
+en la fila de cada mesa receptora. <br/><br/>
+        <span class="bold">Artículo 237. Del escrutinio. </span>Cerrada la votación, los miembros de la
+Junta Receptora de Votos procederán a la apertura de las urnas y al escrutinio
+de votos, comprobando que coinciden con el número de votantes, y en su caso,
+consignando en el acta cualquier diferencia; luego, se procederá a contar los
+votos emitidos a favor de cada planilla, los votos que se encuentren en blanco
+y los votos nulos.<br/> “Será voto en blanco todo aquel que no represente ninguna marca o signo en
+la papeleta. Será nulo todo voto que no esté marcado claramente con una X,
+un círculo u otro signo adecuado, cuando el signo abarque más de una planilla,
+a menos que esté clara la intención de voto, o cuando la papeleta contenga
+modificaciones, expresiones, signos o figuras ajenas al proceso. El voto nulo
+tiene validez jurídica, a efecto de determinar la repetición de la elección. <br/>Serán inválidos y carecerán de efectos jurídicos, los votos que no estén
+consignados en boletas legítimas, aquellos que pertenezcan a distrito electoral
+diferente o que no correspondan a la Junta Receptora de Votos de que se
+trate, así como aquellos votos que en cualquier forma revelen la identidad del
+votante.<br/><br/>
+        <span class="bold">Artículo 240. De la comunicación de los resultados. </span>El Presidente
+de cada Junta Receptora de Votos, tan pronto haya entregado el saco electoral
+a la Junta Electoral Municipal, está obligado a informar esta circunstancia al
+Tribunal Supremo Electoral. En el informe deberá consignar además, en letras y
+números, los resultados electorales obtenidos en la Junta Receptora de Votos;
+esta comunicación se hará por la vía más rápida.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="r6Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Convocatoria a repetición de proceso electoral Art. 210 (repetición por voto nulo)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 210. De la repetición de un proceso electoral. </span>Declarada
+la nulidad de una elección por el Tribunal Supremo Electoral se repetirá ésta, y
+para tal efecto se hará la convocatoria correspondiente dentro del plazo de
+quince días a contar de la declaratoria de nulidad, y la nueva elección se llevará
+a cabo dentro de los sesenta días siguientes.<br/>Si la elección se repitiese como consecuencia del porcentaje de la suma de
+votos nulos, se hará la convocatoria a elecciones dentro del plazo de diez días
+a contar de la declaratoria de nulidad; la celebración de asambleas generales
+extraordinarias que correspondan finaliza sesenta días antes de la fecha en
+que se celebren las elecciones; los treinta días siguientes para inscripción de
+candidatos; y, las elecciones se efectuarán un domingo del mes de octubre del
+mismo año.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="r7Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agosto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 210. De la repetición de un proceso electoral. </span>Declarada
+la nulidad de una elección por el Tribunal Supremo Electoral se repetirá ésta, y
+para tal efecto se hará la convocatoria correspondiente dentro del plazo de
+quince días a contar de la declaratoria de nulidad, y la nueva elección se llevará
+a cabo dentro de los sesenta días siguientes.<br/>Si la elección se repitiese como consecuencia del porcentaje de la suma de
+votos nulos, se hará la convocatoria a elecciones dentro del plazo de diez días
+a contar de la declaratoria de nulidad; la celebración de asambleas generales
+extraordinarias que correspondan finaliza sesenta días antes de la fecha en
+que se celebren las elecciones; los treinta días siguientes para inscripción de
+candidatos; y, las elecciones se efectuarán un domingo del mes de octubre del
+mismo año.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="r8Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Octubre</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 196. De la convocatoria.</span> El proceso electoral para elecciones
+generales y diputados al Parlamento Centroamericano, dará inicio con la
+convocatoria, la cual será dictada por el Tribunal Supremo Electoral la segunda o
+tercera semana del mes de enero del año en el que se celebren dichas elecciones.
+El proceso electoral se dividirá en tres fases:
+        <ol type="a">
+          <li>La primera, concerniente al proceso de postulación e inscripción de
+candidaturas a cargos de elección popular, que dará inicio un día después
+de la convocatoria y terminará un día antes del inicio de la segunda fase
+definida en la literal b) de este artículo; en este periodo es prohibida la
+realización de propaganda electoral.</li>
+          <li>La segunda fase será para la campaña electoral de todos los candidatos a
+cargos de elección popular, que dará inicio noventa días antes de la fecha en
+que se celebren las elecciones generales hasta treinta y seis horas antes de
+la elección convocada.</li>
+          <li>La tercera fase comprende la realización de las elecciones, cómputo y
+calificación de los votos emitidos. Las elecciones generales y diputados al
+Parlamento Centroamericano se efectuarán un domingo del mes de junio
+del mismo año.</li>
+        </ol>
+        Si el voto nulo obtuviere la mayoría requerida, se repetirá la elección en los
+casos que procediere, efectuándose un domingo del mes de octubre del mismo
+año. <br/> Si no se diera la repetición de la elección presidencial pero sí, de las elecciones
+municipales de alcaldes y síndicos o de diputados, por listado nacional, por
+planilla distrital, o a diputados del Parlamento Centroamericano, las mismas se
+podrán realizar conjuntamente con la segunda elección presidencial. <br/> 
+        En el decreto de convocatoria, el Tribunal Supremo Electoral fijará la fecha de
+cada fase del proceso electoral y de los eventos que en cada una correspondan,
+especialmente lo previsto en el artículo 215 de esta Ley. </br>
+        El decreto de convocatoria para la elección de diputados a la Asamblea Nacional
+Constituyente y de consulta popular se dictará con una anticipación no menor
+de noventa días a la fecha de celebración.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="r9Modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Segunda elección presidente y vicepresidente (voto nulo)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="bold">Artículo 196. De la convocatoria.</span> El proceso electoral para elecciones
+generales y diputados al Parlamento Centroamericano, dará inicio con la
+convocatoria, la cual será dictada por el Tribunal Supremo Electoral la segunda o
+tercera semana del mes de enero del año en el que se celebren dichas elecciones.
+El proceso electoral se dividirá en tres fases:
+        <ol type="a">
+          <li>La primera, concerniente al proceso de postulación e inscripción de
+candidaturas a cargos de elección popular, que dará inicio un día después
+de la convocatoria y terminará un día antes del inicio de la segunda fase
+definida en la literal b) de este artículo; en este periodo es prohibida la
+realización de propaganda electoral.</li>
+          <li>La segunda fase será para la campaña electoral de todos los candidatos a
+cargos de elección popular, que dará inicio noventa días antes de la fecha en
+que se celebren las elecciones generales hasta treinta y seis horas antes de
+la elección convocada.</li>
+          <li>La tercera fase comprende la realización de las elecciones, cómputo y
+calificación de los votos emitidos. Las elecciones generales y diputados al
+Parlamento Centroamericano se efectuarán un domingo del mes de junio
+del mismo año.</li>
+        </ol>
+        Si el voto nulo obtuviere la mayoría requerida, se repetirá la elección en los
+casos que procediere, efectuándose un domingo del mes de octubre del mismo
+año. <br/> Si no se diera la repetición de la elección presidencial pero sí, de las elecciones
+municipales de alcaldes y síndicos o de diputados, por listado nacional, por
+planilla distrital, o a diputados del Parlamento Centroamericano, las mismas se
+podrán realizar conjuntamente con la segunda elección presidencial. <br/> 
+        En el decreto de convocatoria, el Tribunal Supremo Electoral fijará la fecha de
+cada fase del proceso electoral y de los eventos que en cada una correspondan,
+especialmente lo previsto en el artículo 215 de esta Ley. </br>
+        El decreto de convocatoria para la elección de diputados a la Asamblea Nacional
+Constituyente y de consulta popular se dictará con una anticipación no menor
+de noventa días a la fecha de celebración.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of Modals -->
 <div class="bottom-menu">
   {% include viz-menu.html %}
 </div>
