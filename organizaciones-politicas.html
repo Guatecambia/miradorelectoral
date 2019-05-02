@@ -384,6 +384,7 @@ id: organizaciones-politicas
           if (width > 1000)
             width = parseInt(width/2);
           tmpbtn.remove();
+          jQuery('#collapse'+element+' #candidate-graphs .row #candidato-genero').append('<h3>Participación por género en listado nacional de '+element+'</h3>');
 
           var height = width * 0.5;
           var radius = width * 0.25;
@@ -470,6 +471,8 @@ id: organizaciones-politicas
           if (width > 1000)
             width = parseInt(width/2) - margin.left - margin.right;;
           tmpbtn.remove();
+          
+          jQuery('#collapse'+element+' #candidate-graphs .row #candidato-genero').append('<h3>Casillas vacantes en lista nacional por partido '+element+'</h3>');
 
           var height = width/2 - margin.top - margin.bottom;
           var xScale = d3.scaleLinear()
@@ -547,6 +550,8 @@ id: organizaciones-politicas
             if (width > 1000)
               width = parseInt(width/2) - margin.left - margin.right;;
             tmpbtn.remove();
+            
+            jQuery('#collapse'+element+' #parlacen-graphs .row #parlacen-genero').append('<h3>Participación por género en candidatos al PARLACEN por el partido '+element+'</h3>');
 
             var height = width/2 - margin.top - margin.bottom;
             var xScale = d3.scaleLinear()

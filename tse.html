@@ -243,8 +243,8 @@ id: tse
                 .enter()
                 .append('rect')
                 .attr("class","bar")
-                .attr("x", function(d) { return xScale(d["year"]); })
-                .attr("width", xScale.bandwidth() )
+                .attr("x", function(d) { return xScale(d["year"]) + margin.right/2 ; })
+                .attr("width", xScale.bandwidth() - margin.right )
                 .attr("y", function(d) { return yScale(d["count"]); })
                 .attr("height", function(d) { return height - yScale(d["count"]); })
                 .on('mouseover', function(d,i) {
@@ -264,8 +264,15 @@ id: tse
             .attr("transform", "translate(0, "+height+")")
             .call(d3.axisBottom(xScale));
             
-          svgPadronC.append("g")
-            .call(d3.axisLeft(yScale));
+          svgPadronC.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+              .data(data)
+              .enter()
+              .append("text")
+              .text( function(d) {
+                return d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              })
+              .attr("x", function(d) { return xScale(d["year"]) + xScale.bandwidth()/2 - 20 ; })
+              .attr("y", function(d) { return yScale(d["count"]) - 5; });
         </script>
       </div>
     </div>

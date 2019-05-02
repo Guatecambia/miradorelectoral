@@ -36,7 +36,7 @@ id: medios-de-comunicacion
               {name: 'Marzo*', count: 501},
               {name: 'Total', count: 1322},
             ];
-        var margin = {top: 20, right: 20, bottom: 30, left: 70};
+        var margin = {top: 20, right: 20, bottom: 30, left: 50};
         var width = parseInt(d3.select("#coberturaCyP").style("width")) - margin.left - margin.right;
         var height = width/2 - margin.top - margin.bottom;
         var xScale = d3.scaleLinear()
@@ -77,12 +77,21 @@ id: medios-de-comunicacion
                   .duration(500)
                   .style("opacity",0);
               });
-        svgPadronC.append("g")
+        /*svgPadronC.append("g")
           .attr("transform", "translate(0, "+height+")")
-          .call(d3.axisBottom(xScale));
+          .call(d3.axisBottom(xScale));*/
           
         svgPadronC.append("g")
           .call(d3.axisLeft(yScale));
+        svgPadronC.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text( function(d) {
+              return d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            })
+            .attr("y", function(d) { return yScale(d["name"]) + yScale.bandwidth()/2  ; })
+            .attr("x", function(d) { return xScale(d["count"]) + 5; });
       </script>
     </div>
   </div>
@@ -102,6 +111,7 @@ id: medios-de-comunicacion
             ];
         var margin = {top: 20, right: 20, bottom: 30, left: 70};
         var width = parseInt(d3.select("#candidatoMencion").style("width")) - margin.left - margin.right;
+        width+=60;
         var height = width/2 - margin.top - margin.bottom;
         var yScale = d3.scaleLinear()
             .range([height, 0])
@@ -124,8 +134,8 @@ id: medios-de-comunicacion
               .enter()
               .append('rect')
               .attr("class","bar")
-              .attr("x", function(d) { return xScale(d["name"]); })
-              .attr("width", xScale.bandwidth() )
+              .attr("x", function(d) { return xScale(d["name"]) + margin.right/2 ; })
+              .attr("width", xScale.bandwidth() - margin.right )
               .attr("y", function(d) { return yScale(d["count"]); })
               .attr("height", function(d) { return height - yScale(d["count"]); })
               .on('mouseover', function(d,i) {
@@ -145,8 +155,19 @@ id: medios-de-comunicacion
           .attr("transform", "translate(0, "+height+")")
           .call(d3.axisBottom(xScale));
           
-        svgPadronC.append("g")
-          .call(d3.axisLeft(yScale));
+        svgPadronC.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text( function(d) {
+              console.log(d.count);
+              return d.count;
+            })
+            .attr("x", function(d) { return xScale(d["name"]) + xScale.bandwidth()/2 - 10 ; })
+            .attr("y", function(d) { return yScale(d["count"]) - 5; });
+          
+        /*svgPadronC.append("g")
+          .call(d3.axisLeft(yScale));*/
       </script>
     </div>
   </div>
@@ -186,8 +207,8 @@ id: medios-de-comunicacion
               .enter()
               .append('rect')
               .attr("class","bar")
-              .attr("x", function(d) { return xScale(d["name"]); })
-              .attr("width", xScale.bandwidth() )
+              .attr("x", function(d) { return xScale(d["name"]) + margin.right/2 ; })
+              .attr("width", xScale.bandwidth() - margin.right )
               .attr("y", function(d) { return yScale(d["count"]); })
               .attr("height", function(d) { return height - yScale(d["count"]); })
               .on('mouseover', function(d,i) {
@@ -207,8 +228,17 @@ id: medios-de-comunicacion
           .attr("transform", "translate(0, "+height+")")
           .call(d3.axisBottom(xScale));
           
-        svgPadronC.append("g")
-          .call(d3.axisLeft(yScale));
+        svgPadronC.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text( function(d) {
+              console.log(d.count);
+              return d.count;
+            })
+            .attr("x", function(d) { return xScale(d["name"]) + xScale.bandwidth()/2 - 10 ; })
+            .attr("y", function(d) { return yScale(d["count"]) - 5; });
+          
       </script>
     </div>
   </div>
@@ -249,8 +279,8 @@ id: medios-de-comunicacion
               .enter()
               .append('rect')
               .attr("class","bar")
-              .attr("x", function(d) { return xScale(d["name"]); })
-              .attr("width", xScale.bandwidth() )
+              .attr("x", function(d) { return xScale(d["name"]) + margin.right/2 ; })
+              .attr("width", xScale.bandwidth() - margin.right )
               .attr("y", function(d) { return yScale(d["count"]); })
               .attr("height", function(d) { return height - yScale(d["count"]); })
               .on('mouseover', function(d,i) {
@@ -270,8 +300,16 @@ id: medios-de-comunicacion
           .attr("transform", "translate(0, "+height+")")
           .call(d3.axisBottom(xScale));
           
-        svgPadronC.append("g")
-          .call(d3.axisLeft(yScale));
+        svgPadronC.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text( function(d) {
+              console.log(d.count);
+              return d.count;
+            })
+            .attr("x", function(d) { return xScale(d["name"]) + xScale.bandwidth()/2 - 10 ; })
+            .attr("y", function(d) { return yScale(d["count"]) - 5; });
       </script>
     </div>
   </div>
