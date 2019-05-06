@@ -1,40 +1,93 @@
-<div class="container c-menu">
-  <div class="row">
-    <div class="col-5 col-md-3" >
-      <div class="row">
-        <div class="col-10 col-md-12 col-lg-10">
-          <a href="/">
-            <img class="img-fluid" src="../assets/img/miradorelectoral.png" />
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="col-7 col-md-9">
-      <div class="row">
-        <div class="col-12 d-md-none">
-          <div class="nav nav-xs justify-content-end">
-            {% include social-networks.html %}
+<div class="menu-holder sticky-top">
+  <div class="container c-menu">
+    <div class="row">
+      <div class="col-5 col-md-3" >
+        <div class="row">
+          <div class="col-10 col-md-12 col-lg-10">
+            <a href="/">
+              <img class="img-fluid" src="../assets/img/miradorelectoral.png" />
+            </a>
           </div>
         </div>
       </div>
-      <div class="row menubar">
-        <div class="col-12 col-md-8">
-          <ul class="nav justify-content-md-center">
-            <li class="nav-item {% if page.id == 'quienes-somos' %} active {% endif %}">
-              <a class="nav-link" href="/quienes-somos">Quiénes somos</a>
-            </li>
-            <li class="separator"></li>
-            <li class="nav-item {% if page.id == 'descargas' %} active {% endif %}">
-              <a class="nav-link" href="/descargas">Descargas</a>
-            </li>
-          </ul>
+      <div class="col-7 col-md-9">
+        <div class="row">
+          <div class="col-12 d-md-none">
+            <div class="nav nav-xs justify-content-end">
+              {% include social-networks.html %}
+            </div>
+          </div>
         </div>
-        <div class="d-none d-md-block col-md-4">
-          <div class="nav justify-content-lg-end">
-            {% include social-networks.html %}
+        <div class="row menubar">
+          <div class="col-12 col-md-8">
+            <ul class="nav justify-content-md-center">
+              <li class="nav-item {% if page.id == 'quienes-somos' %} active {% endif %}">
+                <a class="nav-link" href="/quienes-somos">Quiénes somos</a>
+              </li>
+              <li class="separator"></li>
+              <li class="nav-item {% if page.id == 'descargas' %} active {% endif %}">
+                <a class="nav-link" href="/descargas">Descargas</a>
+              </li>
+            </ul>
+          </div>
+          <div class="d-none d-md-block col-md-4">
+            <div class="nav justify-content-lg-end">
+              {% include social-networks.html %}
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="d-none d-md-block col-md-8"></div>
+              <div class="col-md-4">
+                <script>
+                  (function() {
+                    var cx = '000332909471281669947:dbddcntsfm0';
+                    var gcse = document.createElement('script');
+                    gcse.type = 'text/javascript';
+                    gcse.async = true;
+                    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(gcse, s);
+                  })();
+                </script>
+                <gcse:search></gcse:search>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  {%if page.id != 'index' %}
+    <div class="head-viz-menu d-none d-md-block">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 col-md-3 nav-item {% if page.id == 'tse' %} active {% endif %}">
+            <div class="item-img">
+              <a href="/tse"><img class="img-fluid" src="../assets/img/tse.png" /></a><br/>
+            </div>
+            <a href="/tse"><span class="white-text">Tribunal Supremo Electoral</span></a>
+          </div>
+          <div class="col-6 col-md-3 nav-item {% if page.id == 'resultados' %} active {% endif %}">
+            <div class="item-img">
+              <a href="/resultados"><img class="img-fluid" src="../assets/img/resultados.png" /></a><br/>
+            </div>
+            <a href="/resultados"><span class="white-text">Resultados Electorales</span></a>
+          </div>
+          <div class="col-6 col-md-3 nav-item {% if page.id == 'organizaciones-politicas' %} active {% endif %}">
+            <div class="item-img">
+              <a href="/organizaciones-politicas"><img class="img-fluid" src="../assets/img/org_politicas.png" /></a><br/>
+            </div>
+            <a href="/organizaciones-politicas"><span class="white-text">Organizaciones Políticas</span></a>
+          </div>
+          <div class="col-6 col-md-3 nav-item no-border {% if page.id == 'medios-de-comunicacion' %} active {% endif %}">
+            <div class="item-img">
+              <a href="/medios-de-comunicacion"><img class="img-fluid" src="../assets/img/medios.png" /></a><br/>
+            </div>
+            <a href="/medios-de-comunicacion"><span class="white-text">Medios de Comunicación</span></a>
+          </div>
+        </div>
+      </div>
+    </div>          
+  {% endif %}
 </div>

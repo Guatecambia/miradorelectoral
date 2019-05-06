@@ -17,6 +17,21 @@ a:hover {
   bottom:0;
   width:100%;
 }
+.head-viz-menu .item-img {
+  width:10%;
+  display: inline-block;
+  margin: 10px auto;
+}
+.head-viz-menu .col-3 {
+  text-align: center;
+  border-right: 1px solid white;
+}
+.head-viz-menu .col-3.no-border {
+  border-right: none;
+}
+h1.title {
+  padding-top: 15px;
+}
 a.nav-link {
   color: $blue;
 }
@@ -24,6 +39,13 @@ a.nav-link {
   background: #fff;
   width: 45%;
   margin: 25px auto;
+}
+.head-viz-menu .nav-item .item-img:hover, .head-viz-menu .nav-item:hover .item-img, 
+.head-viz-menu .nav-item.active .item-img  {
+  background: $orange;
+}
+.head-viz-menu .nav-item.active .white-text {
+  color: $orange;
 }
 .index-block .nav-item:hover .item-img, .c-menu .nav-item:hover, .c-menu .nav-item.active,
 #viz-menu .nav-item:hover .item-img, #viz-menu .nav-item.active .item-img, #viz-menu .nav-item.active .item-img {
@@ -72,9 +94,16 @@ a.nav-link {
 .nav-xs .sn-icon {
   width: 30px;
 }
+.menu-holder {
+  background: #fff;
+}
 .c-menu {
-  margin-bottom:45px;
-  margin-top: 25px;
+  padding-bottom:25px;
+  padding-top: 25px;
+}
+.head-viz-menu {
+  background: $blue;
+  color: white;
 }
 .index-block {
   background: $blue;
@@ -272,6 +301,14 @@ span.bold {
 #parlacen-table, #parlacen-graphs {
   margin-top: 45px;
 }
+/* google search engine*/
+.cse .gsc-control-cse, .gsc-control-cse {
+  padding: 0 !important;
+}
+.gsib_a {
+  padding: 0px 9px;
+}
+/*end of google search engine*/
 @media (max-width: 576px) {
   .separator {
     margin: 0 2px;
