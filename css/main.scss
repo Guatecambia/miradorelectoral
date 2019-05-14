@@ -18,7 +18,7 @@ a:hover {
   width:100%;
 }
 .head-viz-menu .item-img {
-  width:10%;
+  width:20%;
   display: inline-block;
   margin: 10px auto;
 }
@@ -301,6 +301,21 @@ span.bold {
 #parlacen-table, #parlacen-graphs {
   margin-top: 45px;
 }
+#navbar-site-sm {
+  position:absolute;
+  top:-35px;
+  right:0;
+}
+.navbar-light .navbar-toggler {
+  color:$orange;
+  border-color:$orange;
+}
+.navbar-light .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(97,65,13, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+#navbarFullMenu li.nav-item {
+  padding-left:15px;  
+}
 /* google search engine*/
 .cse .gsc-control-cse, .gsc-control-cse {
   padding: 0 !important;
@@ -348,6 +363,11 @@ span.bold {
   }
   #developed-by img {
     max-width: 60px;
+  }
+  form.gsc-search-box {
+    margin-top: 25px !important;
+    padding-left:15px;
+    padding-right:15px;
   }
 }
 @media (max-width: 321px) { 

@@ -1,16 +1,16 @@
 <div class="menu-holder sticky-top">
   <div class="container c-menu">
     <div class="row">
-      <div class="col-5 col-md-3" >
+      <div class="col-8 col-md-3" >
         <div class="row">
-          <div class="col-10 col-md-12 col-lg-10">
+          <div class="col-12 col-md-12 col-lg-10">
             <a href="/">
               <img class="img-fluid" src="../assets/img/miradorelectoral.png" />
             </a>
           </div>
         </div>
       </div>
-      <div class="col-7 col-md-9">
+      <div class="col-4 col-md-9">
         <div class="row">
           <div class="col-12 d-md-none">
             <div class="nav nav-xs justify-content-end">
@@ -19,23 +19,7 @@
           </div>
         </div>
         <div class="row menubar">
-          <div class="col-12 col-md-8">
-            <ul class="nav justify-content-md-center">
-              <li class="nav-item {% if page.id == 'quienes-somos' %} active {% endif %}">
-                <a class="nav-link" href="/quienes-somos">Quiénes somos</a>
-              </li>
-              <li class="separator"></li>
-              <li class="nav-item {% if page.id == 'descargas' %} active {% endif %}">
-                <a class="nav-link" href="/descargas">Descargas</a>
-              </li>
-            </ul>
-          </div>
-          <div class="d-none d-md-block col-md-4">
-            <div class="nav justify-content-lg-end">
-              {% include social-networks.html %}
-            </div>
-          </div>
-          <div class="col-12">
+          <div class="d-none d-md-block col-md-12">
             <div class="row">
               <div class="d-none d-md-block col-md-8"></div>
               <div class="col-md-4">
@@ -54,8 +38,55 @@
               </div>
             </div>
           </div>
+          <div class="d-none d-md-block col-md-8">
+            <ul class="nav justify-content-md-center">
+              <li class="nav-item {% if page.id == 'quienes-somos' %} active {% endif %}">
+                <a class="nav-link" href="/quienes-somos">Quiénes somos</a>
+              </li>
+              <li class="separator"></li>
+              <li class="nav-item {% if page.id == 'descargas' %} active {% endif %}">
+                <a class="nav-link" href="/descargas">Descargas</a>
+              </li>
+            </ul>
+          </div>
+          <div class="d-none d-md-block col-md-4">
+            <div class="nav justify-content-lg-end">
+              {% include social-networks.html %}
+            </div>
+          </div>
+          <nav id="navbar-site-sm" class="d-block d-md-none navbar navbar-expand-sm navbar-light text-right">
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarFullMenu" aria controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+           </button>
+          </nav>
         </div>
       </div>
+    </div>
+    <div class="row">
+     <div class="collapse navbar-collapse" id="navbarFullMenu">
+       <gcse:search></gcse:search>
+       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+         <li class="nav-item {% if page.id == 'quienes-somos' %} active {% endif %}">
+            <a class="nav-link" href="/quienes-somos">Quiénes somos</a>
+         </li>
+         <li class="nav-item {% if page.id == 'descargas' %} active {% endif %}">
+            <a class="nav-link" href="/descargas">Descargas</a>
+         </li>
+         <li class="nav-item {% if page.id == 'tse' %} active {% endif %}">
+            <a class="nav-link" href="/tse">Tribunal Supremo Electoral</a>
+         </li>
+         <li class="nav-item {% if page.id == 'resultados' %} active {% endif %}">
+            <a class="nav-link" href="/resultados">Resultados Electorales</a>
+         </li>
+         <li class="nav-item {% if page.id == 'organizaciones-politicas' %} active {% endif %}">
+            <a class="nav-link" href="/organizaciones-politicas">Organizaciones Políticas</a>
+         </li>
+         <li class="nav-item {% if page.id == 'medios-de-comunicacion' %} active {% endif %}">
+            <a class="nav-link" href="/medios-de-comunicacion">Medios de Comunicación</a>
+         </li>
+
+       </ul>
+     </div>
     </div>
   </div>
   {%if page.id != 'index' %}
