@@ -200,7 +200,7 @@ h1 .title-orange {
     pointer-events: none;
     opacity:0;
 }
-.tooltip::after {
+#tooltip::after {
   content: "";
   position: absolute;
   bottom: 100%;
