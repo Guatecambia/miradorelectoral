@@ -363,6 +363,7 @@ id: organizaciones-politicas
         }
         partidos.sort();
         partidos.forEach(function(element) {
+          jQuery('#parties').append('<img class="ppLogo" src="../assets/img/ppLogo/'+element.normalize('NFD').replace(/[\u0300-\u036f]/g, "")+'.png" />');
           jQuery('#parties').append('<button class="btn btn-link" data-toggle="collapse" data-target="#collapse'+element+'" role="button" aria-expanded="false">'+element+'</button><br/>');
           jQuery('#parties').append('<div class="collapse row" id="collapse'+element+'"></div>');
           jQuery('#collapse'+element).append('<div id="candidate-table" class="col-12 col-md-5"></div>');
