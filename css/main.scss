@@ -2,6 +2,15 @@
 ---
 
 @import 'bootstrap/bootstrap';
+@font-face {
+  font-family: Apercu;
+  src: url('../assets/apercu/apercu_regular.otf');
+}
+@font-face {
+  font-family: Apercu;
+  font-weight: bold;
+  src: url('../assets/apercu/apercu_bold.otf');
+}
 body {
   font-family: 'Roboto', sans-serif;
   color: $blue;
@@ -396,3 +405,26 @@ span.bold {
   }
 }
 
+.promotedContent {
+    position:fixed;
+    bottom:0;
+    z-index:1200;
+    width:100%;
+    background: #444471;
+}
+
+.promotedP{
+    text-align:center;
+    color: #FFF;
+    margin: 10px;
+    font-family: 'Apercu', 'Roboto';
+}
+
+.promotedP a, .promotedP a:hover, .promotedP a:visited{
+    color: #27B1AA;
+    font-weight:bold;
+}
+
+.promotedP img {
+  height: 50px;
+}
