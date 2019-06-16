@@ -26,73 +26,94 @@ id: medios-de-comunicacion
   </div>
 
   <div class="row content justify-content-center">
+    <div class="col-12">
+      <h2>Candidaturas presidenciables con mayor cobertura en medios</h2>
+    </div>
     <div class="col-12 col-lg-6">
-      <h2>Cobertura de candidatos y precandidatos (en número de notas)</h2>
+      <div class="row">
+        <div class="col-lg-3 d-none d-lg-block"></div>
+        <div class="col-12 col-lg-6">
+          <div class="countPanel">
+            <h2>8,105</h2>
+            <span><p>Notas publicadas del 1/01 al 30/04/2019</p></span>
+          </div>
+        </div>
+        <div class="col-lg-3 d-none d-lg-block"></div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
       <div id="coberturaCyP"></div>
-      <script type="text/javascript">
-        var data = [
-              {name: 'Enero', count: 240},
-              {name: 'Febrero', count: 581},
-              {name: 'Marzo*', count: 501},
-              {name: 'Total', count: 1322},
-            ];
-        var margin = {top: 20, right: 20, bottom: 30, left: 50};
-        var width = parseInt(d3.select("#coberturaCyP").style("width")) - margin.left - margin.right;
-        var height = width/2 - margin.top - margin.bottom;
-        var xScale = d3.scaleLinear()
-            .range([0, width])
-            .domain([0, d3.max(data, function(d) { return d["count"]; })]);
-        var yScale = d3.scaleBand()
-            .range([0, height])
-            .domain(data.map(function(d) { return d["name"]; }))
-            .padding(0.1);
-        var svgPadronC = d3.select("div#coberturaCyP")
-              .append('svg')
-              .attr('width', width+margin.left+margin.right)
-              .attr('height', height+margin.top+margin.bottom)
-              .append('g')
-              .attr('transform', 'translate('+margin.left+','+margin.top+')');
-        var tooltipCyP = d3.select("div#coberturaCyP").append("div")
-              .attr("id","tooltipCyP")
-              .attr("class","tooltip");
-        var g = svgPadronC.selectAll(".bar")
-              .data(data)
-              .enter()
-              .append('rect')
-              .attr("class","bar")
-              .attr("y", function(d) { return yScale(d["name"]); })
-              .attr("height", yScale.bandwidth() )
-              .attr("x", function(d) { return 0; })
-              .attr("width", function(d) { return xScale(d["count"]); })
-              .on('mouseover', function(d,i) {
-                self.tooltipCyP.transition()
-                  .duration(200)
-                  .style("opacity", 1);
-                self.tooltipCyP.html(d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" notas")
-                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#coberturaCyP').offset().left)+"px")
-                    .style("top", (event.pageY - jQuery('div#coberturaCyP').offset().top + 40)+"px");
-              })
-              .on('mouseout', function(d) {
-                self.tooltipCyP.transition()
-                  .duration(500)
-                  .style("opacity",0);
-              });
-        /*svgPadronC.append("g")
-          .attr("transform", "translate(0, "+height+")")
-          .call(d3.axisBottom(xScale));*/
-          
-        svgPadronC.append("g")
-          .call(d3.axisLeft(yScale));
-        svgPadronC.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
-            .data(data)
-            .enter()
-            .append("text")
-            .text( function(d) {
-              return d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        <script type="text/javascript">
+          var data = [
+                {name: 'Resto de candidaturas', count: 3323, percentage: 41, color: "#4472c4"},
+                {name: 'Thelma Aldana', count: 1702, percentage: 21, color: "#ed7d31"},
+                {name: 'Sandra Torres', count: 1054, percentage: 13, color: "#a5a5a5"},
+                {name: 'Zury Ríos', count: 973, percentage: 12, color: "#ffc000"},
+                {name: 'Mario Estrada', count: 729, percentage: 9, color: "#5b9bd5"},
+                {name: 'Roberto Arzú', count: 324, percentage: 4, color: "#70ad47"},
+              ];
+          var width = parseInt(d3.select("div#coberturaCyP").style("width"));
+          if (width > 1000)
+            width = width/2;
+          var height = width * 0.7;
+          var radius = (width * 0.25);
+          var svgPadron = d3.select("div#coberturaCyP")
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .append('g')
+                .attr('transform', 'translate(' + (width/2) + ',' + (height/2) + ')');
+
+          var tooltipP2019 = d3.select("div#coberturaCyP").append("div")
+                .attr("id","tooltipP2019")
+                .attr("class","tooltip");
+
+          var arc = d3.arc()
+                .outerRadius(radius - 10)
+                .innerRadius(radius - (radius/2));
+
+          var pie = d3.pie()
+                .sort(null)
+                .value(function(d) {
+                  return d.percentage;
+                });
+
+          var g = svgPadron.selectAll(".arc")
+                .data(pie(data))
+                .enter().append('g')
+                .on('mouseover', function(d,i) {
+                  self.tooltipP2019.transition()
+                    .duration(200)
+                    .style("opacity", 1);
+                  self.tooltipP2019.html(d.data.name+' '+d.data.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" notas")
+                      .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#coberturaCyP').offset().left)+"px")
+                      .style("top", (event.pageY - jQuery('div#coberturaCyP').offset().top)+"px");
+                })
+                .on('mouseout', function(d) {
+                  self.tooltipP2019.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+
+          g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d,i) {
+              return d.data.color;
+            });
+
+          g.append("text")
+            .attr("transform", function(d) {
+              var _d = arc.centroid(d);
+              _d[0] *= 2;
+              _d[1] *= 1.5;
+              return "translate(" + _d + ")";
             })
-            .attr("y", function(d) { return yScale(d["name"]) + yScale.bandwidth()/2  ; })
-            .attr("x", function(d) { return xScale(d["count"]) + 5; });
-      </script>
+            .attr("dy", "0.5em")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+              return d.data.name + ':' + d.data.percentage + '%';
+            });
+        </script>
     </div>
   </div>
 
@@ -160,7 +181,6 @@ id: medios-de-comunicacion
             .enter()
             .append("text")
             .text( function(d) {
-              console.log(d.count);
               return d.count;
             })
             .attr("x", function(d) { return xScale(d["name"]) + xScale.bandwidth()/2 - 10 ; })
@@ -171,6 +191,289 @@ id: medios-de-comunicacion
       </script>
     </div>
   </div>
+  
+
+  <div class="row viz-separator"></div>
+  <div class="row content justify-content-center">
+    <div class="col-12 col-lg-6">
+      <h2>Dinámicas de inclusión</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <div class="row">
+        <div class="col-lg-3 d-none d-lg-block"></div>
+        <div class="col-12 col-lg-6">
+          <div class="countPanel">
+            <h2>2.34%</h2>
+            <span><p>190 notas</p></span>
+          </div>
+        </div>
+        <div class="col-lg-3 d-none d-lg-block"></div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div id="dinamicaInclusion"></div>
+      <script type="text/javascript">
+        var data = [
+              {name: 'Jóvenes', count: 61},
+              {name: 'Mujeres', count: 68},
+              {name: 'Indígenas', count: 13},
+              {name: 'LGTBIQ+', count: 13},
+              {name: 'Personas con cap. diferentes', count: 22},
+              {name: 'Todos o varios', count: 13},
+            ];
+        var margin = {top: 20, right: 20, bottom: 30, left: 70};
+        var width = parseInt(d3.select("#dinamicaInclusion").style("width")) - margin.left - margin.right;
+        width+=60;
+        var height = width/1.5 - margin.top - margin.bottom;
+        var yScale = d3.scaleLinear()
+            .range([height, 0])
+            .domain([0, d3.max(data, function(d) { return d["count"]; })]);
+        var xScale = d3.scaleBand()
+            .range([0, width])
+            .domain(data.map(function(d) { return d["name"]; }))
+            .padding(0.1);
+        var svgPadronC = d3.select("div#dinamicaInclusion")
+              .append('svg')
+              .attr('width', width+margin.left+margin.right)
+              .attr('height', height+margin.top+margin.bottom)
+              .append('g')
+              .attr('transform', 'translate('+margin.left+','+margin.top+')');
+        var tooltipCM = d3.select("div#dinamicaInclusion").append("div")
+              .attr("id","tooltipCM")
+              .attr("class","tooltip");
+        var g = svgPadronC.selectAll(".bar")
+              .data(data)
+              .enter()
+              .append('rect')
+              .attr("class","bar")
+              .attr("x", function(d) { return xScale(d["name"]) + margin.right/2 ; })
+              .attr("width", xScale.bandwidth() - margin.right )
+              .attr("y", function(d) { return yScale(d["count"]); })
+              .attr("height", function(d) { return height - yScale(d["count"]); })
+              .on('mouseover', function(d,i) {
+                self.tooltipCM.transition()
+                  .duration(200)
+                  .style("opacity", 1);
+                self.tooltipCM.html(d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" notas")
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#dinamicaInclusion').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#dinamicaInclusion').offset().top + 40)+"px");
+              })
+              .on('mouseout', function(d) {
+                self.tooltipCM.transition()
+                  .duration(500)
+                  .style("opacity",0);
+              });
+        svgPadronC.append("g")
+          .attr("transform", "translate(0, "+height+")")
+          .call(d3.axisBottom(xScale))
+          .selectAll(".tick text")
+          .call(wrap, xScale.bandwidth());
+
+          
+        svgPadronC.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text( function(d) {
+              return d.count;
+            })
+            .attr("x", function(d) { return xScale(d["name"]) + xScale.bandwidth()/2 - 10 ; })
+            .attr("y", function(d) { return yScale(d["count"]) - 5; });
+
+            function wrap(text, width) {
+              text.each(function() {
+                var text = d3.select(this),
+                    words = text.text().split(/\s+/).reverse(),
+                    word,
+                    line = [],
+                    lineNumber = 0,
+                    lineHeight = 1.1, // ems
+                    y = text.attr("y"),
+                    dy = parseFloat(text.attr("dy")),
+                    tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em")
+                while (word = words.pop()) {
+                  line.push(word)
+                  tspan.text(line.join(" "))
+                  if (tspan.node().getComputedTextLength() > width) {
+                    line.pop()
+                    tspan.text(line.join(" "))
+                    line = [word]
+                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", `${++lineNumber * lineHeight + dy}em`).text(word)
+                  }
+                }
+              })
+            }
+
+
+
+        /*svgPadronC.append("g")
+          .call(d3.axisLeft(yScale));*/
+      </script>
+    </div>
+  </div>
+
+  <div class="row viz-separator"></div>
+  <div class="row content justify-content-center">
+    <div class="col-12 col-lg-6">
+      <h2>Infomerciales</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div id="infomerciales"></div>
+      <script>
+        var data = [
+            {name: "Amilcar Rivera", count: 1},
+            {name: "Benito Morales", count: 1},
+            {name: "Pablo Duarte", count: 1},
+            {name: "Pablo Ignacio Ceto", count: 1},
+            {name: "Danilo Roca", count: 1},
+            {name: "Manuel Villacorta", count: 2},
+            {name: "José Luis Chea", count: 2},
+            {name: "Isaac Farchi", count: 2},
+            {name: "Estuardo Gáldamez", count: 3},
+            {name: "Aníbal García", count: 3},
+            {name: "Julio Héctor Estrada", count: 4},
+            {name: "Mauricio Radford", count: 4},
+            {name: "Álvaro Arzú Escobar", count: 4},
+            {name: "Zury Ríos", count: 4},
+            {name: "Alejandro Giammattei", count: 5},
+            {name: "Fredy Cabrera", count: 5},
+            {name: "Mario Estrada", count: 5},
+            {name: "Sandra Torres", count: 5},
+            {name: "Luis Velásquez", count: 6},
+            {name: "Edmont Mulet", count: 7},
+            {name: "Roberto Arzú", count: 8},
+            {name: "Edwin Escobar", count: 12},
+        ];
+          var margin = {top: 20, right: 50, bottom: 20, left: 120};
+          var width = parseInt(d3.select("#infomerciales").style("width")) - margin.left - margin.right;
+          var height = (width) - margin.top - margin.bottom;
+          var xScale = d3.scaleLinear()
+              .range([0, width])
+              .domain([0, d3.max(data, function(d) { return d["count"]; })]);
+          var yScale = d3.scaleBand()
+              .range([0, height])
+              .domain(data.map(function(d) { return d["name"]; }))
+              .padding(0.1);
+                            
+          var svgHor = d3.select('#infomerciales')
+                .append('svg')
+                .attr('width', width+margin.left+margin.right)
+                .attr('height', height+margin.top+margin.bottom)
+                .append('g')
+                .attr('transform', 'translate('+margin.left+','+margin.top+')');
+          var tooltipI = d3.select('#infomerciales').append("div")
+                .attr("id","tooltipCyP")
+                .attr("class","tooltip");
+          var g = svgHor.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr("class","bar")
+                .attr("y", function(d) { return yScale(d["name"]); })
+                .attr("height", yScale.bandwidth() )
+                .attr("x", function(d) { return 0; })
+                .attr("width", function(d) { return xScale(parseInt(d["count"])); })
+                .on('mouseover', function(d) {
+                  tooltipI.transition()
+                    .duration(200)
+                    .style("opacity", 1);
+                  tooltipI.html(d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"")
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#infomerciales').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#infomerciales').offset().top + 40)+"px");
+                })
+                .on('mouseout', function(d) {
+                  tooltipI.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+
+          svgHor.append("g")
+            .call(d3.axisLeft(yScale));
+            
+          svgHor.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+              .data(data)
+              .enter()
+              .append("text")
+              .text( function(d) {
+                return d.count;
+              })
+              .attr("y", function(d) { return yScale(d["name"]) + yScale.bandwidth(); })
+              .attr("x", function(d) { return xScale(d["count"]); });
+
+            
+      </script>
+    </div>
+    <div class="col-12 col-md-6">
+      <div id="infomerciales2"></div>
+      <script>
+          var data = [
+            {name: "Noti 7", count: 57},
+            {name: "Teledario ", count: 26},
+            {name: "El Independiente", count: 3},
+            {name: "TOTAL", count: 86},
+          ];
+          var margin = {top: 20, right: 50, bottom: 20, left: 120};
+          var width = parseInt(d3.select("#infomerciales2").style("width")) - margin.left - margin.right;
+          var height = width/2 - margin.top - margin.bottom;
+          var xScale = d3.scaleLinear()
+              .range([0, width])
+              .domain([0, d3.max(data, function(d) { return d["count"]; })]);
+          var yScale = d3.scaleBand()
+              .range([0, height])
+              .domain(data.map(function(d) { return d["name"]; }))
+              .padding(0.1);
+
+          var svgHor = d3.select('#infomerciales2')
+                .append('svg')
+                .attr('width', width+margin.left+margin.right)
+                .attr('height', height+margin.top+margin.bottom)
+                .append('g')
+                .attr('transform', 'translate('+margin.left+','+margin.top+')');
+          var tooltipI2 = d3.select('#infomerciales2').append("div")
+                .attr("id","tooltipI2")
+                .attr("class","tooltip");
+          var g = svgHor.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr("class","bar")
+                .attr("y", function(d) { return yScale(d["name"]); })
+                .attr("height", yScale.bandwidth() )
+                .attr("x", function(d) { return 0; })
+                .attr("width", function(d) { return xScale(parseInt(d["count"])); })
+                .on('mouseover', function(d) {
+                  tooltipI2.transition()
+                    .duration(200)
+                    .style("opacity", 1);
+                  tooltipI2.html(d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"")
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#infomerciales2').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#infomerciales2').offset().top + 40)+"px");
+                })
+                .on('mouseout', function(d) {
+                  tooltipI2.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+
+          svgHor.append("g")
+            .call(d3.axisLeft(yScale));
+          svgHor.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+              .data(data)
+              .enter()
+              .append("text")
+              .text( function(d) {
+                return d.count;
+              })
+              .attr("y", function(d) { return yScale(d["name"]) + yScale.bandwidth()/2; })
+              .attr("x", function(d) { return xScale(d["count"]); });
+      </script>
+    </div>
+  </div>
+
   <div class="row viz-separator"></div>
   <div class="row content justify-content-center">
     <div class="col-12 col-lg-6">
@@ -227,18 +530,17 @@ id: medios-de-comunicacion
         svgPadronC.append("g")
           .attr("transform", "translate(0, "+height+")")
           .call(d3.axisBottom(xScale));
-          
+
         svgPadronC.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
             .data(data)
             .enter()
             .append("text")
             .text( function(d) {
-              console.log(d.count);
               return d.count;
             })
             .attr("x", function(d) { return xScale(d["name"]) + xScale.bandwidth()/2 - 10 ; })
             .attr("y", function(d) { return yScale(d["count"]) - 5; });
-          
+
       </script>
     </div>
   </div>
@@ -305,7 +607,6 @@ id: medios-de-comunicacion
             .enter()
             .append("text")
             .text( function(d) {
-              console.log(d.count);
               return d.count;
             })
             .attr("x", function(d) { return xScale(d["name"]) + xScale.bandwidth()/2 - 10 ; })

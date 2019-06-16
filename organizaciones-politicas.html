@@ -20,6 +20,711 @@ id: organizaciones-politicas
   </div-->
 </div>
 <div class="container" style="margin-top:35px;">
+  <div class="row content justify-content-center">
+    <div class="col-12">
+      <h2>Promedio de días tomados por el Registro de Ciudadanos para resolver y notificar INSCRIPCIÓN Presidencial y Diputados</h2>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="row">
+        <div class="col-12 col-lg-4">
+          <div class="countPanel">
+            <h2>7 días</h2>
+            <span><p>Candidaturas Presidenciales</p></span>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="countPanel">
+            <h2>20 días</h2>
+            <span><p>Candidaturas Listado Nacional</p></span>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="countPanel">
+            <h2>21 días</h2>
+            <span><p>Candidaturas Parlacen</p></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row viz-separator"></div>
+  <div class="row content justify-content-center">
+    <div class="col-12">
+      <h2>Inclusión por género en candidaturas</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-4">
+      <h4>Nivel Presidencial</h4>
+      <div id="generoPresidencial"></div>
+        <script type="text/javascript">
+          var data = [
+                {name: 'Hombres', count: 79, percentage: 79, color: "#4472c4"},
+                {name: 'Mujeres', count: 21, percentage: 21, color: "#ed7d31"},
+              ];
+          var width = parseInt(d3.select("div#generoPresidencial").style("width"));
+          if (width > 1000)
+            width = width/2;
+          var height = width * 0.7;
+          var radius = (width * 0.25);
+          var svgPadron = d3.select("div#generoPresidencial")
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .append('g')
+                .attr('transform', 'translate(' + (width/2) + ',' + (height/2) + ')');
+
+          var tooltipP2019 = d3.select("div#generoPresidencial").append("div")
+                .attr("id","tooltipP2019")
+                .attr("class","tooltip");
+
+          var arc = d3.arc()
+                .outerRadius(radius - 10)
+                .innerRadius(radius - (radius/2));
+
+          var pie = d3.pie()
+                .sort(null)
+                .value(function(d) {
+                  return d.percentage;
+                });
+
+          var g = svgPadron.selectAll(".arc")
+                .data(pie(data))
+                .enter().append('g');
+
+          g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d,i) {
+              return d.data.color;
+            });
+
+          g.append("text")
+            .attr("transform", function(d) {
+              var _d = arc.centroid(d);
+              _d[0] *= 2;
+              _d[1] *= 1.5;
+              return "translate(" + _d + ")";
+            })
+            .attr("dy", "0.5em")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+              return d.data.name + ':' + d.data.percentage + '%';
+            });
+        </script>
+    </div>
+    <div class="col-12 col-lg-4">
+      <h4>Listado Nacional</h4>
+      <div id="generoListadoNacional"></div>
+        <script type="text/javascript">
+          var data = [
+                {name: 'Hombres', count: 79, percentage: 79, color: "#4472c4"},
+                {name: 'Mujeres', count: 21, percentage: 21, color: "#ed7d31"},
+              ];
+          var width = parseInt(d3.select("div#generoListadoNacional").style("width"));
+          if (width > 1000)
+            width = width/2;
+          var height = width * 0.7;
+          var radius = (width * 0.25);
+          var svgPadron = d3.select("div#generoListadoNacional")
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .append('g')
+                .attr('transform', 'translate(' + (width/2) + ',' + (height/2) + ')');
+
+          var tooltipP2019 = d3.select("div#generoListadoNacional").append("div")
+                .attr("id","tooltipP2019")
+                .attr("class","tooltip");
+
+          var arc = d3.arc()
+                .outerRadius(radius - 10)
+                .innerRadius(radius - (radius/2));
+
+          var pie = d3.pie()
+                .sort(null)
+                .value(function(d) {
+                  return d.percentage;
+                });
+
+          var g = svgPadron.selectAll(".arc")
+                .data(pie(data))
+                .enter().append('g');
+
+          g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d,i) {
+              return d.data.color;
+            });
+
+          g.append("text")
+            .attr("transform", function(d) {
+              var _d = arc.centroid(d);
+              _d[0] *= 2;
+              _d[1] *= 1.5;
+              return "translate(" + _d + ")";
+            })
+            .attr("dy", "0.5em")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+              return d.data.name + ':' + d.data.percentage + '%';
+            });
+        </script>
+    </div>
+    <div class="col-12 col-lg-4">
+      <h4>Parlacen</h4>
+      <div id="generoParlacen"></div>
+        <script type="text/javascript">
+          var data = [
+                {name: 'Hombres titulares', count: 28, percentage: 28, color: "#4472c4"},
+                {name: 'Hombres suplentes', count: 29, percentage: 29, color: "#a5a5a5"},
+                {name: 'Mujeres titulares', count: 22, percentage: 22, color: "#ed7d31"},
+                {name: 'Mujeres suplentes', count: 22, percentage: 22, color: "#ffc000"},
+              ];
+          var width = parseInt(d3.select("div#generoParlacen").style("width"));
+          if (width > 1000)
+            width = width/2;
+          var height = width * 0.7;
+          var radius = (width * 0.25);
+          var svgPadron = d3.select("div#generoParlacen")
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .append('g')
+                .attr('transform', 'translate(' + (width/2) + ',' + (height/2) + ')');
+
+          var tooltipP2019 = d3.select("div#generoParlacen").append("div")
+                .attr("id","tooltipP2019")
+                .attr("class","tooltip");
+
+          var arc = d3.arc()
+                .outerRadius(radius - 10)
+                .innerRadius(radius - (radius/2));
+
+          var pie = d3.pie()
+                .sort(null)
+                .value(function(d) {
+                  return d.percentage;
+                });
+
+          var g = svgPadron.selectAll(".arc")
+                .data(pie(data))
+                .enter().append('g');
+
+          g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d,i) {
+              return d.data.color;
+            });
+
+          g.append("text")
+            .attr("transform", function(d) {
+              var _d = arc.centroid(d);
+              _d[0] *= 2;
+              _d[1] *= 1.5;
+              return "translate(" + _d + ")";
+            })
+            .attr("dy", "0.5em")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+              return d.data.name + ':' + d.data.percentage + '%';
+            });
+        </script>
+    </div>
+  </div>
+
+  <div class="row viz-separator"></div>
+  <div class="row content justify-content-center">
+    <div class="col-12">
+      <h2>Reelección legislativa</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <h4>2015</h4>
+      <div id="reeleccion2015"></div>
+      <script type="text/javascript">
+        var data = [
+              {name: "Total de diputado/as reelectos/as", count: 75},
+              {name: "Reelección mismo distrito", count: 61},
+              {name: "Reelección diferente distrito/lista", count: 14},
+              {name: "Intención de reelección mismo partido", count: 39},
+              {name: "Reelección difente partido", count: 36},
+            ];
+        var margin = {top: 20, right: 20, bottom: 50, left: 70};
+        var width = parseInt(d3.select("#reeleccion2015").style("width")) - margin.left - margin.right;
+        width+=60;
+        var height = width/2 - margin.top - margin.bottom;
+        var yScale = d3.scaleLinear()
+            .range([height, 0])
+            .domain([0, d3.max(data, function(d) { return d["count"]; })]);
+        var xScale = d3.scaleBand()
+            .range([0, width])
+            .domain(data.map(function(d) { return d["name"]; }))
+            .padding(0.1);
+        var svgPadronC = d3.select("div#reeleccion2015")
+              .append('svg')
+              .attr('width', width+margin.left+margin.right)
+              .attr('height', height+margin.top+margin.bottom)
+              .append('g')
+              .attr('transform', 'translate('+margin.left+','+margin.top+')');
+        var tooltipR1 = d3.select("div#reeleccion2015").append("div")
+              .attr("id","tooltipCM")
+              .attr("class","tooltip");
+        var g = svgPadronC.selectAll(".bar")
+              .data(data)
+              .enter()
+              .append('rect')
+              .attr("class","bar")
+              .attr("x", function(d) { return xScale(d["name"]) + margin.right/2 ; })
+              .attr("width", xScale.bandwidth() - margin.right )
+              .attr("y", function(d) { return yScale(d["count"]); })
+              .attr("height", function(d) { return height - yScale(d["count"]); })
+              .on('mouseover', function(d,i) {
+                self.tooltipR1.transition()
+                  .duration(200)
+                  .style("opacity", 1);
+                self.tooltipR1.html(d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" menciones")
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#reeleccion2015').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#reeleccion2015').offset().top + 40)+"px");
+              })
+              .on('mouseout', function(d) {
+                self.tooltipR1.transition()
+                  .duration(500)
+                  .style("opacity",0);
+              });
+        svgPadronC.append("g")
+          .attr("transform", "translate(0, "+height+")")
+          .call(d3.axisBottom(xScale))
+          .selectAll(".tick text")
+          .call(wrap, xScale.bandwidth());
+          
+        svgPadronC.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text( function(d) {
+              return d.count;
+            })
+            .attr("x", function(d) { return xScale(d["name"]) + xScale.bandwidth()/2 - 10 ; })
+            .attr("y", function(d) { return yScale(d["count"]) - 5; });
+          
+            function wrap(text, width) {
+              text.each(function() {
+                var text = d3.select(this),
+                    words = text.text().split(/\s+/).reverse(),
+                    word,
+                    line = [],
+                    lineNumber = 0,
+                    lineHeight = 1.1, // ems
+                    y = text.attr("y"),
+                    dy = parseFloat(text.attr("dy")),
+                    tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em")
+                while (word = words.pop()) {
+                  line.push(word)
+                  tspan.text(line.join(" "))
+                  if (tspan.node().getComputedTextLength() > width) {
+                    line.pop()
+                    tspan.text(line.join(" "))
+                    line = [word]
+                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", `${++lineNumber * lineHeight + dy}em`).text(word)
+                  }
+                }
+              })
+            }
+          
+        /*svgPadronC.append("g")
+          .call(d3.axisLeft(yScale));*/
+      </script>
+    </div>
+    <div class="col-12 col-lg-6">
+      <h4>2019</h4>
+      <div id="candidatoMencion"></div>
+      <script type="text/javascript">
+        var data = [
+              {name: "Total de diputado/as con intención de reelegirse", count: 66},
+              {name: "Reelección mismo distrito", count: 53},
+              {name: "Reelección diferente distrito/lista", count: 13},
+              {name: "Intención de reelección mismo partido", count: 50},
+              {name: "Reelección difente partido", count: 16},
+            ];
+        var margin = {top: 20, right: 20, bottom: 50, left: 70};
+        var width = parseInt(d3.select("#candidatoMencion").style("width")) - margin.left - margin.right;
+        width+=60;
+        var height = width/2 - margin.top - margin.bottom;
+        var yScale = d3.scaleLinear()
+            .range([height, 0])
+            .domain([0, d3.max(data, function(d) { return d["count"]; })]);
+        var xScale = d3.scaleBand()
+            .range([0, width])
+            .domain(data.map(function(d) { return d["name"]; }))
+            .padding(0.1);
+        var svgPadronC = d3.select("div#candidatoMencion")
+              .append('svg')
+              .attr('width', width+margin.left+margin.right)
+              .attr('height', height+margin.top+margin.bottom)
+              .append('g')
+              .attr('transform', 'translate('+margin.left+','+margin.top+')');
+        var tooltipCM = d3.select("div#candidatoMencion").append("div")
+              .attr("id","tooltipCM")
+              .attr("class","tooltip");
+        var g = svgPadronC.selectAll(".bar")
+              .data(data)
+              .enter()
+              .append('rect')
+              .attr("class","bar")
+              .attr("x", function(d) { return xScale(d["name"]) + margin.right/2 ; })
+              .attr("width", xScale.bandwidth() - margin.right )
+              .attr("y", function(d) { return yScale(d["count"]); })
+              .attr("height", function(d) { return height - yScale(d["count"]); })
+              .on('mouseover', function(d,i) {
+                self.tooltipCM.transition()
+                  .duration(200)
+                  .style("opacity", 1);
+                self.tooltipCM.html(d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" menciones")
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#candidatoMencion').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#candidatoMencion').offset().top + 40)+"px");
+              })
+              .on('mouseout', function(d) {
+                self.tooltipCM.transition()
+                  .duration(500)
+                  .style("opacity",0);
+              });
+        svgPadronC.append("g")
+          .attr("transform", "translate(0, "+height+")")
+          .call(d3.axisBottom(xScale))
+          .selectAll(".tick text")
+          .call(wrap, xScale.bandwidth());
+
+          
+        svgPadronC.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text( function(d) {
+              return d.count;
+            })
+            .attr("x", function(d) { return xScale(d["name"]) + xScale.bandwidth()/2 - 10 ; })
+            .attr("y", function(d) { return yScale(d["count"]) - 5; });
+          
+        /*svgPadronC.append("g")
+          .call(d3.axisLeft(yScale));*/
+      </script>
+    </div>
+  </div>  
+  
+  <div class="row viz-separator"></div>
+  <div class="row content justify-content-center">
+    <div class="col-12">
+      <h2>Candidaturas con procesos judiciales</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <div class="countPanel">
+        <h2>8</h2>
+        <span><p>Candidaturas a nivel presidencial</p></span>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="countPanel">
+        <h2>75</h2>
+        <span><p>Candidaturas a nivel legislativo</p></span>
+      </div>
+    </div>
+  </div>
+
+    
+  <div class="row viz-separator"></div>
+  <div class="row content justify-content-center">
+    <div class="col-12 col-lg-6">
+      <h2>Gastos de campaña</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <ul>
+        <li>
+          <b>25 de 30 partidos políticos cumplieron con presentar el informe mensual del financiamiento privado</b> por origen de recurso de gastos realizados del periodo de marzo de 2019
+        </li>
+        <li>
+          <b>8 partidos políticos presentaron su informe mensual, a través del Sistema de Cuentas Claras,</b> siendo estos (Prosperidad Ciudadana, LIBRE, TODOS, VALOR, PODEMOS, EG, UCN y UNE).
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 col-md-6">
+      <div id="infomerciales2"></div>
+      <script>
+          var data = [
+            {name: "URNG-MAÍZ", count: 1005.00},
+            {name: "MLP", count: 15439.00},
+            {name: "BIEN", count: 19304.62},
+            {name: "FUERZA", count: 20781.25},
+            {name: "WINAQ", count: 29974.29},
+            {name: "AVANZA", count: 44193.32},
+            {name: "PPT", count: 50640.00},
+            {name: "LIBRE", count: 71709.86},
+            {name: "FCN", count: 74573.16},
+            {name: "PAN", count: 98695.00},
+            {name: "CONVERGENCIA", count: 100850.73},
+            {name: "PODEMOS", count: 111713.08},
+            {name: "UNIDOS", count: 137961.24},
+            {name: "VIVA", count: 184367.24},
+            {name: "TODOS", count: 230582.64},
+            {name: "EG", count: 258026.91},
+            {name: "UCN", count: 259291.57},
+            {name: "Victoria", count: 298310.56},
+            {name: "Valor", count: 1022037.63},
+            {name: "Creo", count: 1197328.24},
+            {name: "Vamos", count: 1787933.36},
+            {name: "Unionista", count: 1795143.52},
+            {name: "Prosperidad Ciudadana", count: 1932639.55},
+            {name: "UNE", count: 1970919.89},
+          ];
+          var margin = {top: 20, right: 200, bottom: 50, left: 120};
+          var width = parseInt(d3.select("#infomerciales2").style("width")) - margin.left - margin.right;
+          var height = (width*2) - margin.top - margin.bottom;
+          var xScale = d3.scaleLinear()
+              .range([0, width])
+              .domain([0, d3.max(data, function(d) { return d["count"]; })]);
+          var yScale = d3.scaleBand()
+              .range([0, height])
+              .domain(data.map(function(d) { return d["name"]; }))
+              .padding(0.1);
+
+          var svgHor = d3.select('#infomerciales2')
+                .append('svg')
+                .attr('width', width+margin.left+margin.right)
+                .attr('height', height+margin.top+margin.bottom)
+                .append('g')
+                .attr('transform', 'translate('+margin.left+','+margin.top+')');
+          var tooltipCyP = d3.select('#infomerciales2').append("div")
+                .attr("id","tooltipCyP")
+                .attr("class","tooltip");
+          var g = svgHor.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr("class","bar")
+                .attr("y", function(d) { return yScale(d["name"]); })
+                .attr("height", yScale.bandwidth() )
+                .attr("x", function(d) { return 0; })
+                .attr("width", function(d) { return xScale(parseInt(d["count"])); })
+                .on('mouseover', function(d) {
+                  tooltipCyP.transition()
+                    .duration(200)
+                    .style("opacity", 1);
+                  tooltipCyP.html(d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"")
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#infomerciales2').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#infomerciales2').offset().top + 40)+"px");
+                })
+                .on('mouseout', function(d) {
+                  tooltipCyP.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+
+          svgHor.append("g")
+            .call(d3.axisLeft(yScale));
+            
+        svgHor.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text( function(d) {
+              return d.count;
+            })
+            .attr("y", function(d) { return yScale(d["name"]) + yScale.bandwidth(); })
+            .attr("x", function(d) { return xScale(d["count"]); });
+
+      </script>
+    </div>
+  </div>
+ 
+  <div class="row viz-separator"></div>
+  <div class="row content justify-content-center">
+    <div class="col-12">
+      <h2>Violencia electoral reflejada por los medios de comunicación</h2>
+    </div>
+  </div>
+  <div class="row content justify-content-center">
+    <div class="col-12 col-lg-6">
+      <img class="img-fluid" src="../assets/img/violencia-en-medios.png" />
+    </div>
+  </div>
+  
+  
+  <div class="row viz-separator"></div>
+  <div class="row content justify-content-center">
+    <div class="col-12">
+      <h2>Inclusión política-electoral de las poblaciones subrepresentadas</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <h4>Partidos Políticos que postularon como candidatos a personas LGTBIQ+</h4>
+      <div id="lgbtiq"></div>
+        <script type="text/javascript">
+          var data = [
+            {name: "TODOS", count: 1, percentage: 16.6, color:"#4472c4"},
+            {name: "CONVERGENCIA", count: 2, percentage: 33.4, color:"#a5a5a5"},
+            {name: "WINAQ", count: 1, percentage: 16.6, color:"#ed7d31"},
+            {name: "URNG", count: 1, percentage: 16.6, color:"#ffc000"},
+            {name: "SEMILLA", count: 1, percentage: 16.6, color:"#5b9bd5"},
+          ];
+          var width = parseInt(d3.select("div#lgbtiq").style("width"));
+          if (width > 1000)
+            width = width/2;
+          var height = width * 0.7;
+          var radius = (width * 0.25);
+          var svgPadron = d3.select("div#lgbtiq")
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .append('g')
+                .attr('transform', 'translate(' + (width/2) + ',' + (height/2) + ')');
+
+          var tooltipP2019 = d3.select("div#lgbtiq").append("div")
+                .attr("id","tooltipP2019")
+                .attr("class","tooltip");
+
+          var arc = d3.arc()
+                .outerRadius(radius - 10)
+                .innerRadius(radius - (radius/2));
+
+          var pie = d3.pie()
+                .sort(null)
+                .value(function(d) {
+                  return d.percentage;
+                });
+
+          var g = svgPadron.selectAll(".arc")
+                .data(pie(data))
+                .enter().append('g');
+
+          g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d,i) {
+              return d.data.color;
+            });
+
+          g.append("text")
+            .attr("transform", function(d) {
+              var _d = arc.centroid(d);
+              _d[0] *= 2;
+              _d[1] *= 1.5;
+              return "translate(" + _d + ")";
+            })
+            .attr("dy", "0.5em")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+              return d.data.name + ':' + d.data.count + '';
+            });
+        </script>
+    </div>
+    <div class="col-12 col-lg-6">
+      <h4>Partidos Políticos que postularon como candidatos a personas con capacidades diferentes</h4>
+      <div id="capDif"></div>
+        <script type="text/javascript">
+          var data = [
+            {name: "TODOS", count: 1, percentage: 9, color:"#4472c4"},
+            {name: "CONVERGENCIA", count: 2, percentage: 18, color:"#a5a5a5"},
+            {name: "WINAQ", count: 1, percentage: 9, color:"#ed7d31"},
+            {name: "VAMOS", count: 2, percentage: 18, color:"#ffc000"},
+            {name: "SEMILLA", count: 1, percentage: 9, color:"#5b9bd5"},
+            {name: "VALOR", count: 1, percentage: 9, color:"#70ad47"},
+            {name: "UNE ", count: 2, percentage: 18, color:"#254378"},
+            {name: "VIVA", count: 1, percentage: 9, color:"#9d480d"},
+              ];
+          var width = parseInt(d3.select("div#capDif").style("width"));
+          if (width > 1000)
+            width = width/2;
+          var height = width * 0.7;
+          var radius = (width * 0.25);
+          var svgPadron = d3.select("div#capDif")
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .append('g')
+                .attr('transform', 'translate(' + (width/2) + ',' + (height/2) + ')');
+
+          var tooltipP2019 = d3.select("div#capDif").append("div")
+                .attr("id","tooltipP2019")
+                .attr("class","tooltip");
+
+          var arc = d3.arc()
+                .outerRadius(radius - 10)
+                .innerRadius(radius - (radius/2));
+
+          var pie = d3.pie()
+                .sort(null)
+                .value(function(d) {
+                  return d.percentage;
+                });
+
+          var g = svgPadron.selectAll(".arc")
+                .data(pie(data))
+                .enter().append('g');
+
+          g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d,i) {
+              return d.data.color;
+            });
+
+          g.append("text")
+            .attr("transform", function(d) {
+              var _d = arc.centroid(d);
+              _d[0] *= 2;
+              _d[1] *= 1.5;
+              return "translate(" + _d + ")";
+            })
+            .attr("dy", "0.5em")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+              return d.data.name + ':' + d.data.count + '';
+            });
+        </script>
+    </div>
+  </div>
+
+
+  <div class="row viz-separator"></div>
+  <div class="row content justify-content-center">
+    <div class="col-12">
+      <h2>Candidatos/as que ya publicaron su 3de3</h2>
+    </div>
+    <div class="col-12 col-lg-8">
+      <div class="row">
+        <div class="col-12 col-lg-3">
+          <div class="countPanel">
+            <h2>7</h2>
+            <span><p>Candidatos/as a la Presidencia</p></span>
+          </div>
+        </div>
+        <div class="col-12 col-lg-3">
+          <div class="countPanel">
+            <h2>3</h2>
+            <span><p>Candidatos/as a Alcaldías por Comités Cívicos</p></span>
+          </div>
+        </div>
+        <div class="col-12 col-lg-3">
+          <div class="countPanel">
+            <h2>19</h2>
+            <span><p>Candidatos/as a Alcaldías por Partidos Políticos</p></span>
+          </div>
+        </div>
+        <div class="col-12 col-lg-3">
+          <div class="countPanel">
+            <h2>57</h2>
+            <span><p>Candidatos/as al Congreso</p></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+  
+  <!--div class="row viz-separator"></div>
   <div class="row">
     <div class="col-12">
       <h2>Candidaturas para diputados Listado Nacional y Parlacen</h2>
@@ -374,7 +1079,7 @@ id: organizaciones-politicas
               jQuery('#collapse'+element+' #candidate-table').append("<div class='detail-row'><div class='candidato-num'>"+cNacional[i]["casilla"]+". </div><div class='candidato-name'>"+cNacional[i]["persona"]+"</div></div>");
             }
           }
-          jQuery('#collapse'+element+' #candidate-table').append("</div><!--detail-body-->");
+          jQuery('#collapse'+element+' #candidate-table').append("</div><!--detail-body--><!--");
           jQuery('#collapse'+element).append('<div class="d-md-block col-md-1"></div>');
           jQuery('#collapse'+element).append('<div id="candidate-graphs" class="col-12 col-md-6"><div class="row"><div id="candidato-genero" class="col-12"><div id="candidato-genero-inner"></div></div><div id="candidato-vacantes" class="col-12"></div></div></div>');
 
@@ -470,9 +1175,9 @@ id: organizaciones-politicas
           var tmpbtn = jQuery('#collapse'+element+' #candidate-graphs .row #candidato-genero').clone().appendTo( "body" ).css({'display':'block', 'visibility': 'hidden'});
           var width = parseInt(tmpbtn.width());
           if (width > 1000)
-            width = parseInt(width/2) - margin.left - margin.right;;
+            width = parseInt(width/2) - margin.left - margin.right;
           tmpbtn.remove();
-          
+
           jQuery('#collapse'+element+' #candidate-graphs .row #candidato-genero').append('<h3>Casillas vacantes en lista nacional por partido '+element+'</h3>');
 
           var height = width/2 - margin.top - margin.bottom;
@@ -519,7 +1224,7 @@ id: organizaciones-politicas
           svgVacancy.append("g")
             .attr("transform", "translate(0, "+height+")")
             .call(d3.axisBottom(xScale));
-            
+
           svgVacancy.append("g")
             .call(d3.axisLeft(yScale));
 
@@ -529,7 +1234,7 @@ id: organizaciones-politicas
               hasParlacen = true;
             }
           }
-          
+
           if (hasParlacen) {
             /*parlacen list*/
             jQuery('#collapse'+element).append('<div id="parlacen-table" class="col-12 col-md-5"></div>');
@@ -540,7 +1245,7 @@ id: organizaciones-politicas
                 jQuery('#collapse'+element+' #parlacen-table').append("<div class='detail-row'><div class='candidato-num'>"+cParlacen[i]["casilla"]+". </div><div class='candidato-name'>"+cParlacen[i]["persona"]+"</div><br/><div class='candidato-suplente'>suplente: "+cParlacen[i]["suplente"]+"</div></div>");
               }
             }
-            jQuery('#collapse'+element+' #parlacen-table').append("</div><!--detail-body-->");
+            jQuery('#collapse'+element+' #parlacen-table').append("</div><!--detail-body--><!--");
             jQuery('#collapse'+element).append('<div class="d-md-block col-md-1"></div>');
             jQuery('#collapse'+element).append('<div id="parlacen-graphs" class="col-12 col-md-6"><div class="row"><div id="parlacen-genero" class="col-12"></div></div></div>');
 
@@ -614,7 +1319,7 @@ id: organizaciones-politicas
         });
       </script>
     </div>
-  </div>
+  </div-->
 </div>
 <div class="bottom-menu">
   {% include viz-menu.html %}

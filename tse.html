@@ -133,14 +133,14 @@ id: tse
       <div class="col-12 col-lg-6">
         <h2>Padrón electoral</h2>
         <br/><br/>
-        <p>El número de empadronados al 17 de marzo es de 7,953,187 distribuido en 4, 272,208 mujeres correspondiente al 53.72%, y 3,680,979 hombres correspondiente al 46.28 %</p>
+        <p>El número de empadronados esta distribuido en 4,386,509 mujeres correspondiente al 54%, y 3,763,284 hombres correspondiente al 46%</p>
       </div>
       <div class="col-12 col-lg-6">
         <div id="padron2019"></div>
         <script type="text/javascript">
           var data = [
-                {name: 'Hombres', count: 3680979, percentage: 46.3, color: "#222c58"},
-                {name: 'Mujeres', count: 4272208, percentage: 53.7, color: "#f7a520"},
+                {name: 'Hombres', count: 3763284, percentage: 46, color: "#222c58"},
+                {name: 'Mujeres', count: 4386509, percentage: 54, color: "#f7a520"},
               ];
           var width = parseInt(d3.select("#padron2019").style("width"));
           if (width > 1000)
@@ -211,7 +211,7 @@ id: tse
       <div class="col-12 col-lg-6">
         <h2>Crecimiento en el padrón</h2>
         <br/><br/>
-        <p>El total de empadronados a la fecha establecida fue de 7,678,069 cifra que refleja un incremento inter electoral respecto del 31 de diciembre del año 2014 de 2.28% habiéndose empadronado durante cuatro años 171,173 nuevos ciudadanos.</p>
+        <p>El total de empadronados a la fecha establecida fue de 8,149,793 cifra que refleja un incremento inter electoral respecto del 31 de diciembre del año 2014 de 2.28% habiéndose empadronado durante cuatro años 592,920‬ nuevos ciudadanos.</p>
       </div>
       <div class="col-12 col-lg-6">
         <div id="padronComparativo"></div>
@@ -220,7 +220,7 @@ id: tse
                 {year: '2007', count: 5990029},
                 {year: '2011', count: 7340841},
                 {year: '2015', count: 7556873},
-                {year: '2019', count: 7953187},
+                {year: '2019', count: 8149793},
               ];
           var margin = {top: 20, right: 20, bottom: 30, left: 70};
           var width = parseInt(d3.select("#padronComparativo").style("width")) - margin.left - margin.right;
@@ -281,6 +281,89 @@ id: tse
         </script>
       </div>
     </div>
+
+
+
+    <div class="row viz-separator"></div>
+    <div class="row">
+      <div class="col-12">
+        <h2>Porcentaje por Género Cargo de Presidente JEM en 16 Departamentos</h2>
+      </div>
+    </div>
+    <div class="row content justify-content-center">
+      <div class="col-12 col-lg-6">
+        <div id="presidentesJEM"></div>
+        <script type="text/javascript">
+          var data = [
+                {name: 'Hombres', percentage: 76, color: "#222c58"},
+                {name: 'Mujeres', percentage: 24, color: "#f7a520"},
+              ];
+          var width = parseInt(d3.select("#presidentesJEM").style("width"));
+          if (width > 1000)
+            width = width/2;
+          var height = width * 0.5;
+          var radius = (width * 0.25);
+          var svgPadron = d3.select("div#presidentesJEM")
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .append('g')
+                .attr('transform', 'translate(' + (width/2) + ',' + (height/2) + ')');
+
+          var tooltipP2019 = d3.select("div#presidentesJEM").append("div")
+                .attr("id","tooltipP2019")
+                .attr("class","tooltip");
+
+          var arc = d3.arc()
+                .outerRadius(radius - 10)
+                .innerRadius(radius - (radius/2));
+
+          var pie = d3.pie()
+                .sort(null)
+                .value(function(d) {
+                  return d.percentage;
+                });
+
+          var g = svgPadron.selectAll(".arc")
+                .data(pie(data))
+                .enter().append('g')
+                .on('mouseover', function(d,i) {
+                  self.tooltipP2019.transition()
+                    .duration(200)
+                    .style("opacity", 1);
+                  self.tooltipP2019.html(d.data.percentage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"%")
+                      .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#presidentesJEM').offset().left)+"px")
+                      .style("top", (event.pageY - jQuery('div#presidentesJEM').offset().top)+"px");
+                })
+                .on('mouseout', function(d) {
+                  self.tooltipP2019.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+
+          g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d,i) {
+              return d.data.color;
+            });
+
+          g.append("text")
+            .attr("transform", function(d) {
+              var _d = arc.centroid(d);
+              _d[0] *= 2;
+              _d[1] *= 1.5;
+              return "translate(" + _d + ")";
+            })
+            .attr("dy", "0.5em")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+              return d.data.name + ':' + d.data.percentage + '%';
+            });
+        </script>
+      </div>
+    </div>
+
+
     <div class="row viz-separator"></div>
     <div class="row">
       <div class="col-12 col-lg-6">
