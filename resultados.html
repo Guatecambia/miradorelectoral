@@ -2,6 +2,7 @@
 layout: default
 id: resultados
 ---
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
 <div class="container">
   <div class="row">
     <div class="col-12">
@@ -36,8 +37,430 @@ id: resultados
         </div>
       </div>
     </div>
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="row download-item">
+        <div class="col-3">
+          <a target="_blank" href="https://drive.google.com/file/d/1ATpcpB6SvyOHXYBqMY29vQH2MWOEHw9Q/view?usp=sharing"><img class="img-fluid img-holder" src="../assets/img/download.png" /></a>
+        </div>
+        <div class="col-9">
+          <a target="_blank" href="https://drive.google.com/file/d/1ATpcpB6SvyOHXYBqMY29vQH2MWOEHw9Q/view?usp=sharing">3er informe jornada electoral</a>
+        </div>
+      </div>
+    </div>
   </div>
-  
+  <div class="row content">
+    <div class="col-12">
+      <h2>Proyecciones del Conteo Rápido con los resultados preliminares del TSE</h2>
+      <h3>Basado en los reformes recibidos del 98.6% e los observadores</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 col-lg-2">
+      <img class="img-fluid" src="../assets/img/c1.jpg" />
+    </div>
+    <div class="col-12 col-lg-10">
+      <h3>Sandra Torres</h3>
+      <div id="c1"></div>
+      <script type="text/javascript">
+        var data = [
+          {name: "TSE", count: 25.68, color:"#222c58", message: "Resultados Preliminares del TSE(97%)"},
+          {name: "Conteo Rápido", count: 25.3, color:"#f7a520", rcr:1.13, message: "Proyecciones del Conteo Rápido", rcrM:"24.17% - 26.43%"}, 
+        ];
+
+          var margin = {top: 20, right: 50, bottom: 50, left: 120};
+          var width = parseInt(d3.select("#c1").style("width")) - margin.left - margin.right;
+          var height = 160 - margin.top - margin.bottom;
+          var xScale = d3.scaleLinear()
+              .range([0, width])
+              .domain([0, 26]);
+          var yScale = d3.scaleBand()
+              .range([0, height])
+              .domain(data.map(function(d) { return d["name"]; }))
+              .padding(0.1);
+
+          var svgHor = d3.select('#c1')
+                .append('svg')
+                .attr('width', width+margin.left+margin.right)
+                .attr('height', height+margin.top+margin.bottom)
+                .append('g')
+                .attr('transform', 'translate('+margin.left+','+margin.top+')');
+          var tooltipC1 = d3.select('#c1').append("div")
+                .attr("id","tooltipC1")
+                .attr("class","tooltip");
+          var g = svgHor.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr("fill",function(d) { return d.color; })
+                .attr("y", function(d) { return yScale(d["name"]); })
+                .attr("height", yScale.bandwidth() )
+                .attr("x", function(d) { return 0; })
+                .attr("width", function(d) { return xScale(parseInt(d["count"])); })
+                .on('mouseover', function(d) {
+                  tooltipC1.transition()
+                    .duration(200)
+                    .style("opacity", 1)
+                  tooltipC1.html(d.message+" "+d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"%")
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#c1').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#c1').offset().top + 40)+"px");
+                })
+                .on('mouseout', function(d) {
+                  tooltipC1.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+
+          svgHor.append("g")
+            .style("font-size", "16px")
+            .call(d3.axisLeft(yScale));
+            
+        svgHor.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text( function(d) {
+              return d.count + "%";
+            })
+            .attr("y", function(d) { return yScale(d["name"]) + yScale.bandwidth()/2 + 4; })
+            .attr("x", function(d) { return 10; })
+            .style("font-size", "15px")
+            .attr("fill", "#fff");
+
+
+          svgHor.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('fill', '#a5a5a5')
+                .attr("y", function(d) { return yScale(d["name"]); })
+                .attr("x", function(d) { return xScale(parseInt(d["count"])); })
+                .attr("width", function(d) { return xScale(parseFloat(d["rcr"])); })
+                .attr("height", yScale.bandwidth())
+                .on('mouseover', function(d) {
+                  tooltipC1.transition()
+                    .duration(200)
+                    .style("opacity", 1)
+                  tooltipC1.html("Rángo de conteo rápido(96 Nivel de confianza): "+" "+d.rcrM)
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#c1').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#c1').offset().top + 40)+"px");
+                })
+                .on('mouseout', function(d) {
+                  tooltipC1.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+      </script>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 col-lg-2">
+      <img class="img-fluid" src="../assets/img/c2.jpg" />
+    </div>
+    <div class="col-12 col-lg-10">
+      <h3>Alejandro Giammattei</h3>
+      <div id="c2"></div>
+      <script type="text/javascript">
+        var data = [
+          {name: "TSE", count: 13.93, color:"#222c58", message: "Resultados Preliminares del TSE(97%)"},
+          {name: "Conteo Rápido", count: 13.6, color:"#f7a520", rcr:0.65, message: "Proyecciones del Conteo Rápido", rcrM:"12.95% - 14.25%"}, 
+        ];
+
+          var margin = {top: 20, right: 50, bottom: 50, left: 120};
+          var width = parseInt(d3.select("#c2").style("width")) - margin.left - margin.right;
+          var height = 160 - margin.top - margin.bottom;
+          var xScale = d3.scaleLinear()
+              .range([0, width])
+              .domain([0, 26]);
+          var yScale = d3.scaleBand()
+              .range([0, height])
+              .domain(data.map(function(d) { return d["name"]; }))
+              .padding(0.1);
+
+          var svgHor = d3.select('#c2')
+                .append('svg')
+                .attr('width', width+margin.left+margin.right)
+                .attr('height', height+margin.top+margin.bottom)
+                .append('g')
+                .attr('transform', 'translate('+margin.left+','+margin.top+')');
+          var tooltipC2 = d3.select('#c2').append("div")
+                .attr("id","tooltipC2")
+                .attr("class","tooltip");
+          var g = svgHor.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr("fill",function(d) { return d.color; })
+                .attr("y", function(d) { return yScale(d["name"]); })
+                .attr("height", yScale.bandwidth() )
+                .attr("x", function(d) { return 0; })
+                .attr("width", function(d) { return xScale(parseInt(d["count"])); })
+                .on('mouseover', function(d) {
+                  tooltipC2.transition()
+                    .duration(200)
+                    .style("opacity", 1)
+                  tooltipC2.html(d.message+" "+d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"%")
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#c2').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#c2').offset().top + 40)+"px");
+                })
+                .on('mouseout', function(d) {
+                  tooltipC2.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+
+          svgHor.append("g")
+            .style("font-size", "16px")
+            .call(d3.axisLeft(yScale));
+            
+        svgHor.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text( function(d) {
+              return d.count + "%";
+            })
+            .attr("y", function(d) { return yScale(d["name"]) + yScale.bandwidth()/2 + 4; })
+            .attr("x", function(d) { return 10; })
+            .style("font-size", "15px")
+            .attr("fill", "#fff");
+
+
+          svgHor.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('fill', '#a5a5a5')
+                .attr("y", function(d) { return yScale(d["name"]); })
+                .attr("x", function(d) { return xScale(parseInt(d["count"])); })
+                .attr("width", function(d) { return xScale(parseFloat(d["rcr"])); })
+                .attr("height", yScale.bandwidth())
+                .on('mouseover', function(d) {
+                  tooltipC2.transition()
+                    .duration(200)
+                    .style("opacity", 1)
+                  tooltipC2.html("Rángo de conteo rápido(96 Nivel de confianza): "+d.rcrM)
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#c2').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#c2').offset().top + 40)+"px");
+                })
+                .on('mouseout', function(d) {
+                  tooltipC2.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+      </script>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 col-lg-2">
+      <img class="img-fluid" src="../assets/img/c3.jpg" />
+    </div>
+    <div class="col-12 col-lg-10">
+      <h3>Edmond Mulet</h3>
+      <div id="c3"></div>
+      <script type="text/javascript">
+        var data = [
+          {name: "TSE", count: 11.19, color:"#222c58", message: "Resultados Preliminares del TSE(97%)"},
+          {name: "Conteo Rápido", count: 11.26, color:"#f7a520", rcr:0.54, message: "Proyecciones del Conteo Rápido", rcrM:"10.72% - 11.8%"}, 
+        ];
+
+          var margin = {top: 20, right: 50, bottom: 50, left: 120};
+          var width = parseInt(d3.select("#c3").style("width")) - margin.left - margin.right;
+          var height = 160 - margin.top - margin.bottom;
+          var xScale = d3.scaleLinear()
+              .range([0, width])
+              .domain([0, 26]);
+          var yScale = d3.scaleBand()
+              .range([0, height])
+              .domain(data.map(function(d) { return d["name"]; }))
+              .padding(0.1);
+
+          var svgHor = d3.select('#c3')
+                .append('svg')
+                .attr('width', width+margin.left+margin.right)
+                .attr('height', height+margin.top+margin.bottom)
+                .append('g')
+                .attr('transform', 'translate('+margin.left+','+margin.top+')');
+          var tooltipC3 = d3.select('#c3').append("div")
+                .attr("id","tooltipC3")
+                .attr("class","tooltip");
+          var g = svgHor.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr("fill",function(d) { return d.color; })
+                .attr("y", function(d) { return yScale(d["name"]); })
+                .attr("height", yScale.bandwidth() )
+                .attr("x", function(d) { return 0; })
+                .attr("width", function(d) { return xScale(parseInt(d["count"])); })
+                .on('mouseover', function(d) {
+                  tooltipC3.transition()
+                    .duration(200)
+                    .style("opacity", 1)
+                  tooltipC3.html(d.message+" "+d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"%")
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#c3').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#c3').offset().top + 40)+"px");
+                })
+                .on('mouseout', function(d) {
+                  tooltipC3.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+
+          svgHor.append("g")
+            .style("font-size", "16px")
+            .call(d3.axisLeft(yScale));
+            
+        svgHor.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text( function(d) {
+              return d.count + "%";
+            })
+            .attr("y", function(d) { return yScale(d["name"]) + yScale.bandwidth()/2 + 4; })
+            .attr("x", function(d) { return 10; })
+            .style("font-size", "15px")
+            .attr("fill", "#fff");
+
+
+          svgHor.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('fill', '#a5a5a5')
+                .attr("y", function(d) { return yScale(d["name"]); })
+                .attr("x", function(d) { return xScale(parseInt(d["count"])); })
+                .attr("width", function(d) { return xScale(parseFloat(d["rcr"])); })
+                .attr("height", yScale.bandwidth())
+                .on('mouseover', function(d) {
+                  tooltipC3.transition()
+                    .duration(200)
+                    .style("opacity", 1)
+                  tooltipC3.html("Rángo de conteo rápido(96 Nivel de confianza): "+d.rcrM)
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#c3').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#c3').offset().top + 40)+"px");
+                })
+                .on('mouseout', function(d) {
+                  tooltipC3.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+      </script>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 col-lg-2">
+      <img class="img-fluid" src="../assets/img/c4.jpg" />
+    </div>
+    <div class="col-12 col-lg-10">
+      <h3>Thelma Cabrera</h3>
+      <div id="c4"></div>
+      <script type="text/javascript">
+        var data = [
+          {name: "TSE", count: 10.37, color:"#222c58", message: "Resultados Preliminares del TSE(97%)"},
+          {name: "Conteo Rápido", count: 10.24, color:"#f7a520", rcr:0.68, message: "Proyecciones del Conteo Rápido", rcrM:"9.56% - 10.92%"}, 
+        ];
+
+          var margin = {top: 20, right: 50, bottom: 50, left: 120};
+          var width = parseInt(d3.select("#c4").style("width")) - margin.left - margin.right;
+          var height = 160 - margin.top - margin.bottom;
+          var xScale = d3.scaleLinear()
+              .range([0, width])
+              .domain([0, 26]);
+          var yScale = d3.scaleBand()
+              .range([0, height])
+              .domain(data.map(function(d) { return d["name"]; }))
+              .padding(0.1);
+
+          var svgHor = d3.select('#c4')
+                .append('svg')
+                .attr('width', width+margin.left+margin.right)
+                .attr('height', height+margin.top+margin.bottom)
+                .append('g')
+                .attr('transform', 'translate('+margin.left+','+margin.top+')');
+          var tooltipC4 = d3.select('#c4').append("div")
+                .attr("id","tooltipC4")
+                .attr("class","tooltip");
+          var g = svgHor.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr("fill",function(d) { return d.color; })
+                .attr("y", function(d) { return yScale(d["name"]); })
+                .attr("height", yScale.bandwidth() )
+                .attr("x", function(d) { return 0; })
+                .attr("width", function(d) { return xScale(parseInt(d["count"])); })
+                .on('mouseover', function(d) {
+                  tooltipC4.transition()
+                    .duration(200)
+                    .style("opacity", 1)
+                  tooltipC4.html(d.message+" "+d.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"%")
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#c4').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#c4').offset().top + 40)+"px");
+                })
+                .on('mouseout', function(d) {
+                  tooltipC4.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+
+          svgHor.append("g")
+            .style("font-size", "16px")
+            .call(d3.axisLeft(yScale));
+            
+        svgHor.append("g").attr("font-size","10").attr("font-family","sans-serif").selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text( function(d) {
+              return d.count + "%";
+            })
+            .attr("y", function(d) { return yScale(d["name"]) + yScale.bandwidth()/2 + 4; })
+            .attr("x", function(d) { return 10; })
+            .style("font-size", "15px")
+            .attr("fill", "#fff");
+
+
+          svgHor.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('fill', '#a5a5a5')
+                .attr("y", function(d) { return yScale(d["name"]); })
+                .attr("x", function(d) { return xScale(parseInt(d["count"])); })
+                .attr("width", function(d) { return xScale(parseFloat(d["rcr"])); })
+                .attr("height", yScale.bandwidth())
+                .on('mouseover', function(d) {
+                  tooltipC4.transition()
+                    .duration(200)
+                    .style("opacity", 1)
+                  tooltipC4.html("Rángo de conteo rápido(96 Nivel de confianza): "+d.rcrM)
+                    .style("left", (event.pageX - jQuery(document).scrollLeft() - jQuery('div#c4').offset().left)+"px")
+                    .style("top", (event.pageY - jQuery('div#c4').offset().top + 40)+"px");
+                })
+                .on('mouseout', function(d) {
+                  tooltipC4.transition()
+                    .duration(500)
+                    .style("opacity",0);
+                });
+      </script>
+    </div>
+  </div>
+
+
+  <div class="row content">
+    <div class="col-12">
+      <h2>Proyecciones del conteo rápido hasta las 01:00pm del lunes 17 de Junio de 2019</h2>
+    </div>
+  </div>
+  <div class="row content justify-content-center">
+    <div class="col-12 col-lg-6">
+      <img class="img-fluid" src="../assets/img/proyeccionesCR20190617.jpg" />
+    </div>
+  </div>
+
+
+
 </div>
 <div class="bottom-menu">
   {% include viz-menu.html %}
